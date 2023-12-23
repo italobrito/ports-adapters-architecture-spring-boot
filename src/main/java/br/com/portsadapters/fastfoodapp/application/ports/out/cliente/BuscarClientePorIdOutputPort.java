@@ -2,8 +2,8 @@ package br.com.portsadapters.fastfoodapp.application.ports.out.cliente;
 
 import java.util.Optional;
 
-import br.com.portsadapters.fastfoodapp.application.core.domain.Cliente;
+import br.com.portsadapters.fastfoodapp.adapters.out.repository.entity.ClienteEntity;
 
 public interface BuscarClientePorIdOutputPort {
-	Optional<Cliente> buscarPorId(Long id);
+	Optional<ClienteEntity> buscarPorId(Long id);
 }

@@ -2,7 +2,7 @@ package br.com.portsadapters.fastfoodapp.application.core.usecase.cliente;
 
 import java.util.Optional;
 
-import br.com.portsadapters.fastfoodapp.application.core.domain.Cliente;
+import br.com.portsadapters.fastfoodapp.adapters.out.repository.entity.ClienteEntity;
 import br.com.portsadapters.fastfoodapp.application.ports.in.cliente.BuscarClientePorIdInputPort;
 import br.com.portsadapters.fastfoodapp.application.ports.out.cliente.BuscarClientePorIdOutputPort;
 
@@ -15,8 +15,8 @@ public class BuscarClientePorIdUseCase implements BuscarClientePorIdInputPort {
 	}
 
 	@Override
-	public Optional<Cliente> buscarPorId(Long id) {
-		Optional<Cliente> cliente = buscarClientePorIdOutputPort.buscarPorId(id);
+	public Optional<ClienteEntity> buscarPorId(Long id) {
+		Optional<ClienteEntity> cliente = buscarClientePorIdOutputPort.buscarPorId(id);
 		if (cliente == null) {
 			 throw new RuntimeException("Cliente não encontrado");
 		}
