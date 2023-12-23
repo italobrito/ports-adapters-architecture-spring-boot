@@ -1,5 +1,7 @@
 package br.com.portsadapters.fastfoodapp.adapters.out.cliente;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,9 +21,23 @@ public class InserirClienteAdapter implements InserirClienteOutputPort {
 	private ClienteEntityMapper clienteEntityMapper;
 
 	@Override
-	public void inserir(Cliente cliente) {
+	public ClienteEntity inserir(Cliente cliente) {
 		ClienteEntity clienteEntity = clienteEntityMapper.paraClienteEntity(cliente);
-		clienteRepository.save(clienteEntity);
+		ClienteEntity clienteSalvo = clienteRepository.save(clienteEntity);
+		clienteEntity.setId(clienteSalvo.getId());
+		return clienteEntity;
 	}
+	
+    @Override
+    public List<ClienteEntity> inserirTodos(List<Cliente> clientes) {
+        List<ClienteEntity> clientesEntity = clienteEntityMapper.paraClienteEntity(clientes);
+        List<ClienteEntity> savedEntities = clienteRepository.saveAll(clientesEntity);
+
+        for (int i = 0; i < clientes.size(); i++) {
+            clientes.get(i).setId(savedEntities.get(i).getId());
+        }
+
+        return savedEntities;
+    }
 	
 }

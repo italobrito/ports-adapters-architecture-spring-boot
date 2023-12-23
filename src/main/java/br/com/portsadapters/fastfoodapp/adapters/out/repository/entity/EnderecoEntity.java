@@ -2,6 +2,8 @@ package br.com.portsadapters.fastfoodapp.adapters.out.repository.entity;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -29,10 +31,12 @@ public class EnderecoEntity extends BaseEntity implements Serializable {
 	
     @ManyToOne
     @JoinColumn(name = "empresa_id")
+    @JsonBackReference
     private EmpresaEntity empresa;
 
     @ManyToOne
     @JoinColumn(name = "cliente_id")
+    @JsonBackReference
     private ClienteEntity cliente;
 
 }

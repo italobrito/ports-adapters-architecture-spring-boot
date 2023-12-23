@@ -3,6 +3,9 @@ package br.com.portsadapters.fastfoodapp.adapters.out.repository.entity;
 import java.io.Serializable;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -24,11 +27,13 @@ public class ClienteEntity extends BaseEntity implements Serializable {
 	
 	private String nome;
 	
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+	@JsonManagedReference
     private List<EnderecoEntity> enderecos;
     
     @ManyToOne
     @JoinColumn(name = "empresa_id")
+    @JsonBackReference
     private EmpresaEntity empresa;
 	
 	private String cpfCnpj;

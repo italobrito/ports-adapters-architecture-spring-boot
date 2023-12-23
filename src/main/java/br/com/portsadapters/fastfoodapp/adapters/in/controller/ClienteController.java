@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.portsadapters.fastfoodapp.adapters.in.controller.mapper.ClienteMapper;
 import br.com.portsadapters.fastfoodapp.adapters.in.controller.request.ClienteRequest;
+import br.com.portsadapters.fastfoodapp.adapters.out.repository.entity.ClienteEntity;
 import br.com.portsadapters.fastfoodapp.application.core.domain.Cliente;
 import br.com.portsadapters.fastfoodapp.application.ports.in.cliente.InserirClienteInputPort;
 import jakarta.validation.Valid;
@@ -24,10 +25,10 @@ public class ClienteController {
 	private ClienteMapper clienteMapper;
 	
 	@PostMapping
-	public ResponseEntity<Void> inserir(@Valid @RequestBody ClienteRequest clienteRequest) {
+	public ResponseEntity<ClienteEntity> inserir(@Valid @RequestBody ClienteRequest clienteRequest) {
 		Cliente cliente = clienteMapper.paraCliente(clienteRequest);
-		inserirClienteInputPort.inserir(cliente);
-		return ResponseEntity.ok().build();
+		ClienteEntity clienteSalvo = inserirClienteInputPort.inserir(cliente);
+		return ResponseEntity.ok(clienteSalvo);
 	}
 
 }

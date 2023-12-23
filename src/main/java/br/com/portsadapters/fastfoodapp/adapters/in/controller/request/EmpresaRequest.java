@@ -2,7 +2,6 @@ package br.com.portsadapters.fastfoodapp.adapters.in.controller.request;
 
 import java.util.List;
 
-import br.com.portsadapters.fastfoodapp.application.core.domain.Endereco;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,9 +14,11 @@ public class EmpresaRequest extends BaseRequest {
 	private String cnpj;
 	
 	@NotBlank
-	private String status;
+    private List<EnderecoRequest> enderecos;
 	
-	@NotBlank
-    private List<Endereco> enderecos;
+    @NotBlank
+	private Boolean ativo;
+    
+    private List<ClienteRequest> clientes;
     
 }

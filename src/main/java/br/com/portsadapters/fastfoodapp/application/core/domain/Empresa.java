@@ -20,8 +20,10 @@ public class Empresa extends Base implements Serializable  {
 
 	private String cnpj;
 	
-	private String status;
+    private Boolean ativo;
 	
     private List<Endereco> enderecos;
+    
+    private List<Cliente> clientes;
 
 }
