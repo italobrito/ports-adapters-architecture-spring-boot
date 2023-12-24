@@ -21,7 +21,6 @@ public class BuscarClientePorIdUseCase implements BuscarClientePorIdInputPort {
 			 throw new RuntimeException("Cliente não encontrado");
 		}
 		return cliente;
-
 	}
 
 }

@@ -52,7 +52,6 @@ public class ClienteController {
     @GetMapping
     public ResponseEntity<List<ClienteEntity>> buscarTodos() {
     	List<ClienteEntity> clientes = buscarClientesInputPort.buscarTodos();
-//    	List<ClienteResponse> result = clienteMapper.paraClienteResponse(clientes);
     	return ResponseEntity.ok().body(clientes);
     }
 
