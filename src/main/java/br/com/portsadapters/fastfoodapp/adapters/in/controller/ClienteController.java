@@ -20,6 +20,7 @@ import br.com.portsadapters.fastfoodapp.application.ports.in.cliente.AtualizarCl
 import br.com.portsadapters.fastfoodapp.application.ports.in.cliente.BuscarClientePorIdInputPort;
 import br.com.portsadapters.fastfoodapp.application.ports.in.cliente.BuscarClientesInputPort;
 import br.com.portsadapters.fastfoodapp.application.ports.in.cliente.InserirClienteInputPort;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 
 @RestController
@@ -41,6 +42,7 @@ public class ClienteController {
 	@Autowired
 	private ClienteMapper clienteMapper;
 
+	@Operation(summary = "Inserir cliente.", description = "Insere um cliente e retornar o objeto criado.")
 	@PostMapping
 	public ResponseEntity<ClienteEntity> inserir(@Valid @RequestBody ClienteRequest clienteRequest) {
 		Cliente cliente = clienteMapper.paraCliente(clienteRequest);
@@ -48,18 +50,21 @@ public class ClienteController {
 		return ResponseEntity.ok(clienteSalvo);
 	}
 
+	@Operation(summary = "Buscar cliente por Id", description = "Pesquisa um cliente através do seu id.")
 	@GetMapping("/{id}")
 	public ResponseEntity<ClienteEntity> buscarPorId(@PathVariable Long id) {
 		Optional<ClienteEntity> cliente = buscarClientePorIdInputPort.buscarPorId(id);
 		return ResponseEntity.ok(cliente.get());
 	}
 
+	@Operation(summary = "Buscar todos os clientes", description = "Pesquisa todos os clientes.")
 	@GetMapping
 	public ResponseEntity<List<ClienteEntity>> buscarTodos() {
 		List<ClienteEntity> clientes = buscarClientesInputPort.buscarTodos();
 		return ResponseEntity.ok().body(clientes);
 	}
 	
+	@Operation(summary = "Edita um cliente.", description = "Edita um cliente e retorna o objeto editado.")
     @PutMapping("/{id}")
     public ResponseEntity<ClienteEntity> update(@PathVariable final Long id, @Valid @RequestBody ClienteRequest clienteRequest) {
         Cliente cliente = clienteMapper.paraCliente(clienteRequest);
