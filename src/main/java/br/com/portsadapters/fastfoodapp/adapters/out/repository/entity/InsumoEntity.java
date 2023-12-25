@@ -1,12 +1,13 @@
 package br.com.portsadapters.fastfoodapp.adapters.out.repository.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+/*import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import jakarta.persistence.CascadeType;
+import jakarta.persistence.CascadeType;*/
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
@@ -35,5 +36,11 @@ public class InsumoEntity extends BaseEntity implements Serializable {
     
     @ManyToMany(mappedBy = "insumos")
     private List<LancheEntity> lanches = new ArrayList<>();
+    
+    private BigDecimal preco;
+    
+	private int quantidade;
+    
+	private byte[] imagem;
 
 }

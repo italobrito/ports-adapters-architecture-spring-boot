@@ -1,6 +1,8 @@
 package br.com.portsadapters.fastfoodapp.application.core.domain;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -12,18 +14,14 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Empresa extends Base implements Serializable {
-
-	private static final long serialVersionUID = 1072948770078946657L;
+public class Lanche  extends Base implements Serializable {
 	
-    private String nome;
-
-	private String cnpj;
+	private static final long serialVersionUID = -3193160914691037935L;
 	
-    private Boolean ativo;
+	private String nome;
 	
-    private List<Endereco> enderecos;
+    private List<Insumo> insumos = new ArrayList<>();
     
-    private List<Cliente> clientes;
+    private BigDecimal preco;
 
 }
