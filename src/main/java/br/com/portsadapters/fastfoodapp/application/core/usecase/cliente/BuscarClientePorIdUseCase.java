@@ -8,7 +8,7 @@ import br.com.portsadapters.fastfoodapp.application.ports.out.cliente.BuscarClie
 
 public class BuscarClientePorIdUseCase implements BuscarClientePorIdInputPort {
 	
-	private BuscarClientePorIdOutputPort buscarClientePorIdOutputPort;
+	private final BuscarClientePorIdOutputPort buscarClientePorIdOutputPort;
 	
 	public BuscarClientePorIdUseCase(BuscarClientePorIdOutputPort buscarClientePorIdOutputPort) {
 		this.buscarClientePorIdOutputPort = buscarClientePorIdOutputPort;

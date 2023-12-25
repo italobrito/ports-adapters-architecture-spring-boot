@@ -14,6 +14,9 @@ public class EmpresaRequest extends BaseRequest {
 	private String cnpj;
 	
 	@NotBlank
+	private String nome;
+	
+	@NotBlank
     private List<EnderecoRequest> enderecos;
 	
     @NotBlank

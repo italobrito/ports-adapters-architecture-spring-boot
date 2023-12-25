@@ -8,7 +8,7 @@ import br.com.portsadapters.fastfoodapp.application.ports.out.empresa.BuscarEmpr
 
 public class BuscarEmpresaPorIdUseCase implements BuscarEmpresaPorIdInputPort {
 	
-	private BuscarEmpresaPorIdOutputPort buscarEmpresaPorIdOutputPort;
+	private final BuscarEmpresaPorIdOutputPort buscarEmpresaPorIdOutputPort;
 	
 	public BuscarEmpresaPorIdUseCase(BuscarEmpresaPorIdOutputPort buscarEmpresaPorIdOutputPort) {
 		this.buscarEmpresaPorIdOutputPort = buscarEmpresaPorIdOutputPort;

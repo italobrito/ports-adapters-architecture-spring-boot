@@ -24,36 +24,36 @@ import br.com.portsadapters.fastfoodapp.application.ports.in.empresa.BuscarEmpre
 @RestController
 @RequestMapping("/api/v1/empresa")
 public class EmpresaController {
-	
-		@Autowired
-		private InserirEmpresaInputPort inserirEmpresaInputPort; 
-		
-		@Autowired
-		private BuscarEmpresasInputPort buscarEmpresasInputPort; 	
-		
-		@Autowired
-		private BuscarEmpresaPorIdInputPort buscarEmpresaPorIdInputPort; 	
-		
-		@Autowired
-		private EmpresaMapper empresaMapper;
-		
-	   @PostMapping
-	    public ResponseEntity<EmpresaEntity> inserir(@Valid @RequestBody EmpresaRequest empresaRequest) {
-		   Empresa empresa = empresaMapper.paraEmpresa(empresaRequest);
-		   EmpresaEntity empresaEntity = inserirEmpresaInputPort.inserir(empresa);
-           return ResponseEntity.ok(empresaEntity);
-	    }
-	   
-	    @GetMapping
-	    public ResponseEntity<List<EmpresaEntity>> buscarTodos() {
-	    	List<EmpresaEntity> clientes = buscarEmpresasInputPort.buscarTodos();
-	    	return ResponseEntity.ok().body(clientes);
-	    }
-	    
-	    @GetMapping("/{id}")
-	    public ResponseEntity<EmpresaEntity> buscarPorId(@PathVariable Long id) {
-	    	Optional<EmpresaEntity> empresa = buscarEmpresaPorIdInputPort.buscarPorId(id);
-	        return ResponseEntity.ok(empresa.get());
-	    }
+
+	@Autowired
+	private InserirEmpresaInputPort inserirEmpresaInputPort;
+
+	@Autowired
+	private BuscarEmpresasInputPort buscarEmpresasInputPort;
+
+	@Autowired
+	private BuscarEmpresaPorIdInputPort buscarEmpresaPorIdInputPort;
+
+	@Autowired
+	private EmpresaMapper empresaMapper;
+
+	@PostMapping
+	public ResponseEntity<EmpresaEntity> inserir(@Valid @RequestBody EmpresaRequest empresaRequest) {
+		Empresa empresa = empresaMapper.paraEmpresa(empresaRequest);
+		EmpresaEntity empresaEntity = inserirEmpresaInputPort.inserir(empresa);
+		return ResponseEntity.ok(empresaEntity);
+	}
+
+	@GetMapping
+	public ResponseEntity<List<EmpresaEntity>> buscarTodos() {
+		List<EmpresaEntity> clientes = buscarEmpresasInputPort.buscarTodos();
+		return ResponseEntity.ok().body(clientes);
+	}
+
+	@GetMapping("/{id}")
+	public ResponseEntity<EmpresaEntity> buscarPorId(@PathVariable Long id) {
+		Optional<EmpresaEntity> empresa = buscarEmpresaPorIdInputPort.buscarPorId(id);
+		return ResponseEntity.ok(empresa.get());
+	}
 
 }

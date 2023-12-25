@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,7 +12,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Cliente extends Base implements Serializable{
+public class Cliente extends Base implements Serializable {
 
 	private static final long serialVersionUID = 5739658264457191968L;
 	

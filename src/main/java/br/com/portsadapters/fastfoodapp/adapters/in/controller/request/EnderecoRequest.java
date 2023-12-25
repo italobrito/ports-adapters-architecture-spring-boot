@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class EnderecoRequest extends BaseRequest {
-
+	
 	private String rua;
 	
 	private String cep;

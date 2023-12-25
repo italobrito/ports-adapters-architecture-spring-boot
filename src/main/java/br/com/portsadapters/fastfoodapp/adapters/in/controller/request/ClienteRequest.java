@@ -11,10 +11,10 @@ import lombok.Setter;
 public class ClienteRequest extends BaseRequest {
 	
 	@NotBlank
-	private Long id;
+    private List<EnderecoRequest> enderecos;
 	
 	@NotBlank
-    private List<EnderecoRequest> enderecos;
+	private String nome;
 	
 	@NotBlank
 	private String cpfCnpj;
