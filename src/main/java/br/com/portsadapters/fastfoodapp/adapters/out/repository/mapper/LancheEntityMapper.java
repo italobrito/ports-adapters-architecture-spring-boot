@@ -28,6 +28,8 @@ public class LancheEntityMapper {
             insumoEntity.setId(insumo.getId());
             insumoEntity.setNome(insumo.getNome());
             insumoEntity.setPreco(insumo.getPreco());
+            insumoEntity.setQuantidade(insumo.getQuantidade());
+            insumoEntity.setPesoEmGramas(insumo.getPesoEmGramas());
             insumosEntity.add(insumoEntity);
         }
 		
@@ -36,5 +38,6 @@ public class LancheEntityMapper {
 		return lancheEntity;
 		
 	}
+	
 
 }

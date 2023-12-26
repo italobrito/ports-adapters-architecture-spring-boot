@@ -2,7 +2,9 @@ package br.com.portsadapters.fastfoodapp.adapters.in.controller.request;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
+import br.com.portsadapters.fastfoodapp.adapters.out.repository.entity.LancheEntity;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -29,6 +31,8 @@ public class InsumoRequest extends BaseRequest implements Serializable {
 	
 	@NotNull
 	private int quantidade;
+	
+    private List<LancheEntity> lanches;
 	
 	private byte[] imagem;
 

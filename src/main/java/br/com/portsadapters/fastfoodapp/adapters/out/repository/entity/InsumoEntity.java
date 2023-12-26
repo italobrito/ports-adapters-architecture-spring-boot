@@ -2,14 +2,18 @@ package br.com.portsadapters.fastfoodapp.adapters.out.repository.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.ArrayList;
+
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 /*import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.CascadeType;*/
 import jakarta.persistence.Entity;
+
 import jakarta.persistence.ManyToMany;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,8 +38,22 @@ public class InsumoEntity extends BaseEntity implements Serializable {
 	 * @JsonBackReference private List<LancheEntity> lanches;
 	 */
     
+	/*
+	 * @ManyToMany(mappedBy = "insumos") private List<LancheEntity> lanches = new
+	 * ArrayList<>();
+	 */
+	
+	/*
+	 * @ManyToOne
+	 * 
+	 * @JoinColumn(name = "cliente_id")
+	 * 
+	 * @JsonBackReference private ClienteEntity cliente;
+	 */
+    
     @ManyToMany(mappedBy = "insumos")
-    private List<LancheEntity> lanches = new ArrayList<>();
+    @JsonBackReference
+    private List<LancheEntity> lanches;
     
     private BigDecimal preco;
     
