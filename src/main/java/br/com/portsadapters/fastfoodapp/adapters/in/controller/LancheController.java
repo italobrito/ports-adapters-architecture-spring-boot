@@ -1,5 +1,6 @@
 package br.com.portsadapters.fastfoodapp.adapters.in.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,8 @@ import br.com.portsadapters.fastfoodapp.adapters.in.controller.request.LancheReq
 import br.com.portsadapters.fastfoodapp.adapters.in.controller.response.LancheResponse;
 import br.com.portsadapters.fastfoodapp.adapters.out.repository.entity.LancheEntity;
 import br.com.portsadapters.fastfoodapp.application.core.domain.Lanche;
-import br.com.portsadapters.fastfoodapp.application.ports.in.insumo.BuscarLanchePorIdInputPort;
+import br.com.portsadapters.fastfoodapp.application.ports.in.lanche.BuscarLanchePorIdInputPort;
+import br.com.portsadapters.fastfoodapp.application.ports.in.lanche.BuscarLanchesInputPort;
 import br.com.portsadapters.fastfoodapp.application.ports.in.lanche.InserirLancheInputPort;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
@@ -30,6 +32,9 @@ public class LancheController {
 
 	@Autowired
 	private BuscarLanchePorIdInputPort buscarLanchePorIdInputPort;
+	
+	@Autowired
+	private BuscarLanchesInputPort buscarLanchesInputPort;	
 	
 	@Autowired
 	private LancheMapper lancheMapper;
@@ -48,6 +53,14 @@ public class LancheController {
 		Optional<LancheEntity> lancheEntity = buscarLanchePorIdInputPort.buscarPorId(id);
 		LancheResponse lancheResponse = lancheMapper.paraLancheResponse(lancheEntity.get());
 		return ResponseEntity.ok(lancheResponse);
+	}
+	
+
+	@Operation(summary = "Buscar todos os lanches", description = "Pesquisa lanches")
+	@GetMapping
+	public ResponseEntity<List<LancheEntity>> buscarTodos() {
+		List<LancheEntity> lanches = buscarLanchesInputPort.buscarTodos();
+		return ResponseEntity.ok().body(lanches);
 	}
 
 }

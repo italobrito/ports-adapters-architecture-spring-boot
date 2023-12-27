@@ -3,7 +3,7 @@ package br.com.portsadapters.fastfoodapp.application.core.usecase.lanche;
 import java.util.Optional;
 
 import br.com.portsadapters.fastfoodapp.adapters.out.repository.entity.LancheEntity;
-import br.com.portsadapters.fastfoodapp.application.ports.in.insumo.BuscarLanchePorIdInputPort;
+import br.com.portsadapters.fastfoodapp.application.ports.in.lanche.BuscarLanchePorIdInputPort;
 import br.com.portsadapters.fastfoodapp.application.ports.out.lanche.BuscarLanchePorIdOutputPort;
 
 public class BuscarLanchePorIdUseCase implements BuscarLanchePorIdInputPort {

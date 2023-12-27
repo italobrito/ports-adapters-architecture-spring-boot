@@ -1,4 +1,4 @@
-package br.com.portsadapters.fastfoodapp.application.ports.in.insumo;
+package br.com.portsadapters.fastfoodapp.application.ports.in.lanche;
 
 import java.util.Optional;
 
