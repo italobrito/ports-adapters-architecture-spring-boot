@@ -31,9 +31,7 @@ public class LancheMapper {
             
         	insumoCriado.setId(insumoEntity.getId());
         	insumoCriado.setNome(insumoEntity.getNome());
-			/* insumoCriado.setPreco(insumoEntity.getPreco()); */
         	insumoCriado.setQuantidade(insumoEntity.getQuantidade());
-			/* insumoCriado.setImagem(insumoEntity.getImagem()); */
         	insumoCriado.setPesoEmGramas(insumoEntity.getPesoEmGramas());
       	
         	//insumoRequest.setLanches(lancheRequest.getLanches());
@@ -76,4 +74,35 @@ public class LancheMapper {
 		return lanche;
 	}
 
+	public LancheEntity paraLancheEntity(Lanche lanche) {
+		LancheEntity lancheEntity = new LancheEntity();
+		
+		lancheEntity.setId(lanche.getId());
+		lancheEntity.setNome(lanche.getNome());
+		lancheEntity.setPreco(lanche.getPreco());
+		
+        List<InsumoEntity> insumos = new ArrayList<>();
+       
+        for (Insumo insumo: lanche.getInsumos()) {
+        	
+        	InsumoEntity insumoCriado = new InsumoEntity();
+            
+        	insumoCriado.setId(insumo.getId());
+        	insumoCriado.setNome(insumo.getNome());
+        	insumoCriado.setPreco(insumo.getPreco());
+        	insumoCriado.setQuantidade(insumo.getQuantidade());
+        	insumoCriado.setImagem(insumo.getImagem());
+        	insumoCriado.setPesoEmGramas(insumo.getPesoEmGramas());
+      	
+        	//insumoRequest.setLanches(lancheRequest.getLanches());
+            
+        	insumos.add(insumoCriado);
+        }
+		
+        lancheEntity.setInsumos(insumos);
+		
+		return lancheEntity;
+	}
+	
+	
 }

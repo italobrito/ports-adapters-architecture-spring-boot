@@ -18,10 +18,6 @@ public class AtualizarClienteUseCase implements AtualizarClienteInputPort {
 
 	private final BuscarClientePorIdOutputPort buscarClientePorIdOutputPort;
 
-	/*
-	 * @Autowired private ClienteMapper clienteMapper;
-	 */
-
 	public AtualizarClienteUseCase(AtualizarClienteOutputPort atualizarClienteOutputPort,
 			BuscarClientePorIdOutputPort buscarClientePorIdOutputPort) {
 		this.atualizarClienteOutputPort = atualizarClienteOutputPort;

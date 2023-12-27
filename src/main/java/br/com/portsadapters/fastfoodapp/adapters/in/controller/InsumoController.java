@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +17,7 @@ import br.com.portsadapters.fastfoodapp.adapters.in.controller.mapper.InsumoMapp
 import br.com.portsadapters.fastfoodapp.adapters.in.controller.request.InsumoRequest;
 import br.com.portsadapters.fastfoodapp.adapters.out.repository.entity.InsumoEntity;
 import br.com.portsadapters.fastfoodapp.application.core.domain.Insumo;
+import br.com.portsadapters.fastfoodapp.application.ports.in.insumo.AtualizarInsumoInputPort;
 import br.com.portsadapters.fastfoodapp.application.ports.in.insumo.BuscarInsumoPorIdInputPort;
 import br.com.portsadapters.fastfoodapp.application.ports.in.insumo.BuscarInsumosInputPort;
 import br.com.portsadapters.fastfoodapp.application.ports.in.insumo.InserirInsumoInputPort;
@@ -36,6 +38,9 @@ public class InsumoController {
 	private BuscarInsumoPorIdInputPort buscarInsumoPorIdInputPort;
 	
 	@Autowired
+	private AtualizarInsumoInputPort atualizarInsumoInputPort;
+	
+	@Autowired
 	private InsumoMapper insumoMapper;
 	
 	@Operation(summary = "Inserir um insumo para compor os lanches.", description = "Insere um insumo/ingrediente.")
@@ -46,6 +51,14 @@ public class InsumoController {
 		InsumoEntity insumoCriado = inserirInsumoInputPort.inserir(insumo);
 		return ResponseEntity.ok(insumoCriado);
 	}
+	
+	@Operation(summary = "Edita um insumo.", description = "Edita um insumo e retorna o objeto editado.")
+    @PutMapping("/{id}")
+    public ResponseEntity<InsumoEntity> update(@PathVariable final Long id, @Valid @RequestBody InsumoRequest insumoRequest) {
+        Insumo insumo = insumoMapper.paraInsumo(insumoRequest);
+        InsumoEntity insumoAlterado = atualizarInsumoInputPort.atualizar(insumo);
+        return ResponseEntity.ok(insumoAlterado);
+    }
 	
 	@Operation(summary = "Buscar insumo por Id.", description = "Pesquisa por um insumo específico.")
 	@GetMapping("/{id}")

@@ -8,15 +8,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.portsadapters.fastfoodapp.adapters.in.controller.mapper.LancheMapper;
+import br.com.portsadapters.fastfoodapp.adapters.in.controller.request.InsumoRequest;
 import br.com.portsadapters.fastfoodapp.adapters.in.controller.request.LancheRequest;
 import br.com.portsadapters.fastfoodapp.adapters.in.controller.response.LancheResponse;
+import br.com.portsadapters.fastfoodapp.adapters.out.repository.entity.InsumoEntity;
 import br.com.portsadapters.fastfoodapp.adapters.out.repository.entity.LancheEntity;
+import br.com.portsadapters.fastfoodapp.application.core.domain.Insumo;
 import br.com.portsadapters.fastfoodapp.application.core.domain.Lanche;
+import br.com.portsadapters.fastfoodapp.application.ports.in.lanche.AtualizarLancheInputPort;
 import br.com.portsadapters.fastfoodapp.application.ports.in.lanche.BuscarLanchePorIdInputPort;
 import br.com.portsadapters.fastfoodapp.application.ports.in.lanche.BuscarLanchesInputPort;
 import br.com.portsadapters.fastfoodapp.application.ports.in.lanche.InserirLancheInputPort;
@@ -34,7 +39,10 @@ public class LancheController {
 	private BuscarLanchePorIdInputPort buscarLanchePorIdInputPort;
 	
 	@Autowired
-	private BuscarLanchesInputPort buscarLanchesInputPort;	
+	private BuscarLanchesInputPort buscarLanchesInputPort;
+	
+	@Autowired
+	private AtualizarLancheInputPort atualizarLancheInputPort;
 	
 	@Autowired
 	private LancheMapper lancheMapper;
@@ -46,6 +54,14 @@ public class LancheController {
 		LancheEntity lancheSalvo = inserirLancheInputPort.inserir(lanche);
 		return ResponseEntity.ok(lancheSalvo);	
 	}
+	
+	@Operation(summary = "Edita um lanche.", description = "Edita um lanche e retorna o objeto editado.")
+    @PutMapping("/{id}")
+    public ResponseEntity<LancheEntity> update(@PathVariable final Long id, @Valid @RequestBody LancheRequest lancheRequest) {
+        Lanche lanche = lancheMapper.paraLanche(lancheRequest);
+        LancheEntity insumoAlterado = atualizarLancheInputPort.atualizar(lanche);
+        return ResponseEntity.ok(insumoAlterado);
+    }
 	
 	@Operation(summary = "Buscar lanche por Id.", description = "Pesquisa por um lanche específico.")
 	@GetMapping("/{id}")

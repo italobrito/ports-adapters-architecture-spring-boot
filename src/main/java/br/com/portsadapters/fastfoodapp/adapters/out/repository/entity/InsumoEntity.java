@@ -32,25 +32,6 @@ public class InsumoEntity extends BaseEntity implements Serializable {
 	
 	private int pesoEmGramas;
 	
-	/*
-	 * @ManyToMany(mappedBy = "insumos", cascade = CascadeType.ALL)
-	 * 
-	 * @JsonBackReference private List<LancheEntity> lanches;
-	 */
-    
-	/*
-	 * @ManyToMany(mappedBy = "insumos") private List<LancheEntity> lanches = new
-	 * ArrayList<>();
-	 */
-	
-	/*
-	 * @ManyToOne
-	 * 
-	 * @JoinColumn(name = "cliente_id")
-	 * 
-	 * @JsonBackReference private ClienteEntity cliente;
-	 */
-    
     @ManyToMany(mappedBy = "insumos")
     @JsonBackReference
     private List<LancheEntity> lanches;
