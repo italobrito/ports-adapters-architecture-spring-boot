@@ -14,12 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.portsadapters.fastfoodapp.adapters.in.controller.mapper.LancheMapper;
-import br.com.portsadapters.fastfoodapp.adapters.in.controller.request.InsumoRequest;
 import br.com.portsadapters.fastfoodapp.adapters.in.controller.request.LancheRequest;
 import br.com.portsadapters.fastfoodapp.adapters.in.controller.response.LancheResponse;
-import br.com.portsadapters.fastfoodapp.adapters.out.repository.entity.InsumoEntity;
 import br.com.portsadapters.fastfoodapp.adapters.out.repository.entity.LancheEntity;
-import br.com.portsadapters.fastfoodapp.application.core.domain.Insumo;
 import br.com.portsadapters.fastfoodapp.application.core.domain.Lanche;
 import br.com.portsadapters.fastfoodapp.application.ports.in.lanche.AtualizarLancheInputPort;
 import br.com.portsadapters.fastfoodapp.application.ports.in.lanche.BuscarLanchePorIdInputPort;

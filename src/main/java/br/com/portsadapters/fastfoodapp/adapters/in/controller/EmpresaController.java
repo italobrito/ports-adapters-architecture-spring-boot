@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +20,7 @@ import br.com.portsadapters.fastfoodapp.adapters.out.repository.entity.EmpresaEn
 import br.com.portsadapters.fastfoodapp.application.core.domain.Empresa;
 import br.com.portsadapters.fastfoodapp.application.ports.in.empresa.InserirEmpresaInputPort;
 import io.swagger.v3.oas.annotations.Operation;
+import br.com.portsadapters.fastfoodapp.application.ports.in.empresa.AtualizarEmpresaInputPort;
 import br.com.portsadapters.fastfoodapp.application.ports.in.empresa.BuscarEmpresaPorIdInputPort;
 import br.com.portsadapters.fastfoodapp.application.ports.in.empresa.BuscarEmpresasInputPort;
 
@@ -28,6 +30,9 @@ public class EmpresaController {
 
 	@Autowired
 	private InserirEmpresaInputPort inserirEmpresaInputPort;
+	
+	@Autowired
+	private AtualizarEmpresaInputPort atualizarEmpresaInputPort;
 
 	@Autowired
 	private BuscarEmpresasInputPort buscarEmpresasInputPort;
@@ -45,6 +50,15 @@ public class EmpresaController {
 		EmpresaEntity empresaEntity = inserirEmpresaInputPort.inserir(empresa);
 		return ResponseEntity.ok(empresaEntity);
 	}
+	
+	@Operation(summary = "Edita uma empresa.", description = "Edita uma empresa e retorna o objeto editado.")
+    @PutMapping("/{id}")
+    public ResponseEntity<EmpresaEntity> update(@PathVariable final Long id, @Valid @RequestBody EmpresaRequest empresaRequest) {
+		Empresa empresa = empresaMapper.paraEmpresa(empresaRequest);
+		EmpresaEntity empresaAlterado = atualizarEmpresaInputPort.atualizar(empresa);
+        return ResponseEntity.ok(empresaAlterado);
+    }
+
 
 	@Operation(summary = "Buscar todas as empresas cadastradas.", description = "Pesquisa todas as empresas.")
 	@GetMapping

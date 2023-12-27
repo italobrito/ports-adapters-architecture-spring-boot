@@ -4,5 +4,5 @@ import br.com.portsadapters.fastfoodapp.adapters.out.repository.entity.EmpresaEn
 import br.com.portsadapters.fastfoodapp.application.core.domain.Empresa;
 
 public interface AtualizarEmpresaOutputPort {
-	EmpresaEntity atualizar(Empresa cliente);
+	EmpresaEntity atualizar(Empresa empresa);
 }

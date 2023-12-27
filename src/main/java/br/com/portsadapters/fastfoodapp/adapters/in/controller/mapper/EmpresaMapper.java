@@ -22,10 +22,6 @@ public class EmpresaMapper {
 	private EnderecoMapper enderecoMapper;
 	
 	/*
-	 * @Autowired private ClienteMapper clienteMapper;
-	 */
-	
-	/*
 	 * Métodos para CLIENTES
 	 */
     public List<ClienteEntity> deClienteParaClienteEntity(List<Cliente> clientes) {
@@ -49,6 +45,27 @@ public class EmpresaMapper {
         return clientesEntity;
     }
     
+    public List<ClienteEntity> paraListaClienteEntity(List<Cliente> clientes) {
+        List<ClienteEntity> clientesEntity = new ArrayList<>();
+
+        for (Cliente cliente : clientes) {
+            ClienteEntity clienteEntity = new ClienteEntity();
+            clienteEntity.setId(cliente.getId());
+            clienteEntity.setNome(cliente.getNome());
+            clienteEntity.setCpfCnpj(cliente.getCpfCnpj());
+
+            if (cliente.getEmpresa() != null) {
+                clienteEntity.setEmpresa(paraEmpresaEntiy(cliente.getEmpresa()));
+            }
+
+            clienteEntity.setEnderecos(enderecoMapper.paraEnderecoEntity(cliente.getEnderecos(), clienteEntity));
+
+            clientesEntity.add(clienteEntity);
+        }
+
+        return clientesEntity;
+    }
+    
     public List<ClienteEntity> paraClienteEntity(List<ClienteRequest> clienteRequests) {
         List<ClienteEntity> clientesEntity = new ArrayList<>();
         for (ClienteRequest clienteRequest : clienteRequests) {
@@ -60,6 +77,7 @@ public class EmpresaMapper {
         }
         return clientesEntity;
     }
+    
 	
     private Cliente paraCliente(ClienteEntity clienteEntity) {
         Cliente cliente = new Cliente();
@@ -110,16 +128,64 @@ public class EmpresaMapper {
 	 */
     public EmpresaEntity paraEmpresaEntiy(Empresa empresa) {
     	EmpresaEntity empresaEntity = new EmpresaEntity();
+    	empresaEntity.setId(empresa.getId());
     	empresaEntity.setNome(empresa.getNome());
     	empresaEntity.setCnpj(empresa.getCnpj());
     	empresaEntity.setAtivo(empresa.getAtivo());
-    	empresaEntity.setEnderecos(enderecoMapper.paraEnderecoEntity(empresa.getEnderecos()));
-    	empresaEntity.setClientes(deClienteParaClienteEntity(empresa.getClientes()));
+    	
+    	List<EnderecoEntity> enderecosEntity = enderecoMapper.paraEnderecoEntity(empresa.getEnderecos(), empresaEntity);
+    	
+    	List<ClienteEntity> clientesEntity = paraListaClienteEntity(empresa.getClientes());
+    	
+    	List<EnderecoEntity> enderecos = new ArrayList<>();
+    	
+    	List<ClienteEntity> clientes = new ArrayList<>();
+    	
+        if (enderecosEntity != null) {
+            
+            for (EnderecoEntity enderecoEntity : enderecosEntity) {
+            	
+            	EnderecoEntity enderecoEnt = new EnderecoEntity();
+            	
+            	enderecoEnt.setCep(enderecoEntity.getCep());
+            	enderecoEnt.setComplemento(enderecoEntity.getComplemento());
+            	enderecoEnt.setNumero(enderecoEntity.getNumero());
+            	enderecoEnt.setRua(enderecoEntity.getRua());
+            	enderecoEnt.setId(enderecoEntity.getId());
+            	enderecoEnt.setEmpresa(empresaEntity);
+            	
+            	enderecos.add(enderecoEntity);
+            	
+            }
+            
+        }
+        
+        if (clientesEntity != null) {
+            
+            for (ClienteEntity clienteEntity : clientesEntity) {
+            	
+            	ClienteEntity clienteEnt = new ClienteEntity();
+            	
+            	clienteEnt.setCpfCnpj(clienteEntity.getCpfCnpj());
+            	clienteEnt.setNome(clienteEntity.getNome());
+            	clienteEnt.setId(clienteEntity.getId());
+            	clienteEnt.setEmpresa(empresaEntity);
+            	
+            	clientes.add(clienteEnt);
+            	
+            }
+            
+        }
+    	
+    	empresaEntity.setEnderecos(enderecos);
+    	empresaEntity.setClientes(clientes);
+    	
         return empresaEntity;
     }
 	
     public EmpresaEntity paraEmpresaEntiy(EmpresaRequest empresaRequest) {
     	EmpresaEntity empresaEntity = new EmpresaEntity();
+    	empresaEntity.setId(empresaRequest.getId());
     	empresaEntity.setNome(empresaRequest.getNome());
     	empresaEntity.setCnpj(empresaRequest.getCnpj());
     	empresaEntity.setAtivo(empresaRequest.getAtivo());
@@ -130,6 +196,7 @@ public class EmpresaMapper {
 
     public Empresa paraEmpresa(EmpresaRequest empresaRequest) {
         Empresa empresa = new Empresa();
+        empresa.setId(empresaRequest.getId());
         empresa.setNome(empresaRequest.getNome());
         empresa.setCnpj(empresaRequest.getCnpj());
         empresa.setAtivo(empresaRequest.getAtivo());

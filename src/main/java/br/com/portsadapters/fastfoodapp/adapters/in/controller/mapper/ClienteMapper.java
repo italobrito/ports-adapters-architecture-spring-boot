@@ -33,7 +33,6 @@ public class ClienteMapper {
     
     public ClienteEntity paraClienteEntity(Cliente cliente) {
         ClienteEntity clienteEntity = new ClienteEntity();
-        System.out.print(cliente);
         clienteEntity.setId(cliente.getId());
         clienteEntity.setNome(cliente.getNome());
         clienteEntity.setCpfCnpj(cliente.getCpfCnpj());
