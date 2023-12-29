@@ -39,5 +39,35 @@ public class LancheEntityMapper {
 		
 	}
 	
+	public List<LancheEntity> paraLancheEntity(List<Lanche> lanches) {
+	    List<LancheEntity> lanchesEntity = new ArrayList<>();
+
+	    for (Lanche lanche : lanches) {
+	        LancheEntity lancheEntity = new LancheEntity();
+	        
+	        lancheEntity.setId(lanche.getId());
+	        lancheEntity.setNome(lanche.getNome());
+	        lancheEntity.setPreco(lanche.getPreco());
+	        
+	        List<InsumoEntity> insumosEntity = new ArrayList<>();
+	        
+	        for (Insumo insumo : lanche.getInsumos()) {
+	            InsumoEntity insumoEntity = new InsumoEntity();
+	            insumoEntity.setId(insumo.getId());
+	            insumoEntity.setNome(insumo.getNome());
+	            insumoEntity.setPreco(insumo.getPreco());
+	            insumoEntity.setQuantidade(insumo.getQuantidade());
+	            insumoEntity.setPesoEmGramas(insumo.getPesoEmGramas());
+	            insumosEntity.add(insumoEntity);
+	        }
+	        
+	        lancheEntity.setInsumos(insumosEntity);
+	        lanchesEntity.add(lancheEntity);
+	    }
+
+	    return lanchesEntity;
+	}
+
+	
 
 }

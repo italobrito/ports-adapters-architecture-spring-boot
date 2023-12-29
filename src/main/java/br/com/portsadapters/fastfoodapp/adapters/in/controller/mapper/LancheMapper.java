@@ -73,6 +73,39 @@ public class LancheMapper {
 		
 		return lanche;
 	}
+	
+	public List<Lanche> paraLanche(List<LancheRequest> lancheRequests) {
+	    List<Lanche> lanches = new ArrayList<>();
+
+	    for (LancheRequest lancheRequest : lancheRequests) {
+	        Lanche lanche = new Lanche();
+	        
+	        lanche.setId(lancheRequest.getId());
+	        lanche.setNome(lancheRequest.getNome());
+	        lanche.setPreco(lancheRequest.getPreco());
+	        
+	        List<Insumo> insumos = new ArrayList<>();
+	       
+	        for (InsumoRequest insumoRequest : lancheRequest.getInsumos()) {
+	            Insumo insumoCriado = new Insumo();
+	            
+	            insumoCriado.setId(insumoRequest.getId());
+	            insumoCriado.setNome(insumoRequest.getNome());
+	            insumoCriado.setPreco(insumoRequest.getPreco());
+	            insumoCriado.setQuantidade(insumoRequest.getQuantidade());
+	            insumoCriado.setImagem(insumoRequest.getImagem());
+	            insumoCriado.setPesoEmGramas(insumoRequest.getPesoEmGramas());
+	            
+	            insumos.add(insumoCriado);
+	        }
+	        
+	        lanche.setInsumos(insumos);
+	        lanches.add(lanche);
+	    }
+	    
+	    return lanches;
+	}
+
 
 	public LancheEntity paraLancheEntity(Lanche lanche) {
 		LancheEntity lancheEntity = new LancheEntity();

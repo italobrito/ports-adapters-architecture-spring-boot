@@ -135,7 +135,11 @@ public class EmpresaMapper {
     	
     	List<EnderecoEntity> enderecosEntity = enderecoMapper.paraEnderecoEntity(empresa.getEnderecos(), empresaEntity);
     	
-    	List<ClienteEntity> clientesEntity = paraListaClienteEntity(empresa.getClientes());
+    	List<ClienteEntity> clientesEntity = new ArrayList<>();
+    	
+    	if (empresa.getClientes() != null) {
+			clientesEntity = paraListaClienteEntity(empresa.getClientes());
+    	}
     	
     	List<EnderecoEntity> enderecos = new ArrayList<>();
     	
@@ -201,7 +205,9 @@ public class EmpresaMapper {
         empresa.setCnpj(empresaRequest.getCnpj());
         empresa.setAtivo(empresaRequest.getAtivo());
         empresa.setEnderecos(enderecoMapper.paraListaEndereco(empresaRequest.getEnderecos()));
-        empresa.setClientes(paraCliente(empresaRequest.getClientes()));
+        if (empresaRequest.getClientes() != null) {
+        	empresa.setClientes(paraCliente(empresaRequest.getClientes()));
+        }
         return empresa;
     }
     
