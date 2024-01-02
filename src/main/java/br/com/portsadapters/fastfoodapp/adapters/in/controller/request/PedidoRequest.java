@@ -3,6 +3,7 @@ package br.com.portsadapters.fastfoodapp.adapters.in.controller.request;
 import java.math.BigDecimal;
 import java.util.List;
 
+import br.com.portsadapters.fastfoodapp.adapters.in.controller.request.pagamento.PagamentoRequest;
 import br.com.portsadapters.fastfoodapp.application.core.domain.enums.TipoStatus;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -17,6 +18,9 @@ public class PedidoRequest extends BaseRequest {
 	
 	@NotBlank
 	private ClienteRequest cliente;
+	
+	@NotBlank
+	private PagamentoRequest pagamento;
 	
 	private BigDecimal precoTotalPedido;
 	

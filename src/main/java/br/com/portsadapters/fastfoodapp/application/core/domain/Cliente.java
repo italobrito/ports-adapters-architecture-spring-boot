@@ -3,6 +3,7 @@ package br.com.portsadapters.fastfoodapp.application.core.domain;
 import java.io.Serializable;
 import java.util.List;
 
+import br.com.portsadapters.fastfoodapp.application.core.domain.pagamento.Pagamento;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,5 +24,7 @@ public class Cliente extends Base implements Serializable {
 	private String cpfCnpj;
 	
 	private Empresa empresa;
+	
+	private List<Pagamento> formasPagamento;
 
 }

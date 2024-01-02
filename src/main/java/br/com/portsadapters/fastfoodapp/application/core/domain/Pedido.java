@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
+import br.com.portsadapters.fastfoodapp.application.core.domain.enums.TipoPagamentoEnum;
 import br.com.portsadapters.fastfoodapp.application.core.domain.enums.TipoStatus;
+import br.com.portsadapters.fastfoodapp.application.core.domain.pagamento.Pagamento;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,7 +25,11 @@ public class Pedido extends Base implements Serializable {
 	private Cliente cliente;
 
 	private BigDecimal precoTotalPedido;
+	
+	private Pagamento pagamento;
 
 	private TipoStatus status;
+	
+	private TipoPagamentoEnum tipoPagamento;
 
 }
