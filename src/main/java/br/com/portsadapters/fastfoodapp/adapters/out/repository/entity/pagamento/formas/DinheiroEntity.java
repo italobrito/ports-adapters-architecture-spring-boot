@@ -2,11 +2,14 @@ package br.com.portsadapters.fastfoodapp.adapters.out.repository.entity.pagament
 
 import java.io.Serializable;
 
+import br.com.portsadapters.fastfoodapp.adapters.out.repository.entity.pagamento.FormaPagamentoEntity;
 import br.com.portsadapters.fastfoodapp.application.core.domain.enums.TipoPagamentoEnum;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,5 +29,9 @@ public class DinheiroEntity implements Serializable {
 	private Long id;
 	
 	private TipoPagamentoEnum tipoPagamento = TipoPagamentoEnum.DINHEIRO;
+	
+    @OneToOne
+    @JoinColumn(name = "forma_pagamento_id")
+    private FormaPagamentoEntity formaPagamento;
 
 }

@@ -2,21 +2,17 @@ package br.com.portsadapters.fastfoodapp.adapters.in.controller.request.pagament
 
 import java.io.Serializable;
 
-import br.com.portsadapters.fastfoodapp.application.core.domain.enums.TipoPagamentoEnum;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@MappedSuperclass
 public abstract class CartaoRequest implements Serializable {
 
-	private static final long serialVersionUID = 8837065201245954747L;
-	
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private static final long serialVersionUID = 7614663936690087113L;
+
 	private Long id;
 
 	private String numeroCartao;
@@ -31,5 +27,4 @@ public abstract class CartaoRequest implements Serializable {
 	
 	private String apelido;
 	
-	private TipoPagamentoEnum tipoPagamento;
 }

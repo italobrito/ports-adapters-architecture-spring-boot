@@ -6,7 +6,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import br.com.portsadapters.fastfoodapp.adapters.out.repository.entity.pagamento.PagamentoEntity;
+import br.com.portsadapters.fastfoodapp.adapters.out.repository.entity.pagamento.FormaPagamentoEntity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -40,6 +40,7 @@ public class ClienteEntity extends BaseEntity implements Serializable {
 	private String cpfCnpj;
 	
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
-	private List<PagamentoEntity> formasPagamento;
+	@JsonManagedReference 
+	private List<FormaPagamentoEntity> formasPagamento;
 
 }

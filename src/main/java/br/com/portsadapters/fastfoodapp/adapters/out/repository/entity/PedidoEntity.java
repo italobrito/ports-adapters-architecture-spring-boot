@@ -46,8 +46,10 @@ public class PedidoEntity extends BaseEntity implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private TipoStatus status;
 
-	@OneToOne(mappedBy = "pedido")
-	private PagamentoEntity pagamento;
+	/*
+	 * @OneToOne(mappedBy = "pedido", cascade = CascadeType.ALL) private
+	 * PagamentoEntity pagamento;
+	 */
 
 	private TipoPagamentoEnum tipoPagamento;
 

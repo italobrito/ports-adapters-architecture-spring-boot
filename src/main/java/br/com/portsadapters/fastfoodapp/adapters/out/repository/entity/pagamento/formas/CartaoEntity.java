@@ -2,13 +2,15 @@ package br.com.portsadapters.fastfoodapp.adapters.out.repository.entity.pagament
 
 import java.io.Serializable;
 
-import br.com.portsadapters.fastfoodapp.application.core.domain.enums.TipoPagamentoEnum;
+import br.com.portsadapters.fastfoodapp.adapters.out.repository.entity.pagamento.FormaPagamentoEntity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -36,5 +38,7 @@ public abstract class CartaoEntity implements Serializable {
 	
 	private String apelido;
 	
-	private TipoPagamentoEnum tipoPagamento;
+    @OneToOne
+    @JoinColumn(name = "forma_pagamento_id")
+    private FormaPagamentoEntity formaPagamento;
 }

@@ -1,0 +1,19 @@
+package br.com.portsadapters.fastfoodapp.config.pagamento.formas;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+
+import br.com.portsadapters.fastfoodapp.adapters.out.pagamento.formas.InserirCartaoDebitoAdapter;
+import br.com.portsadapters.fastfoodapp.application.core.usecase.pagamento.formas.InserirCartaoDebitoUseCase;
+
+
+@Configuration
+@ComponentScan(basePackages = "br.com.fastfoodapp.app")
+public class InserirCartaoDebitoConfig {
+	@Bean
+	public InserirCartaoDebitoUseCase inserirCartaoDebitoUseCase(
+			InserirCartaoDebitoAdapter inserirCartaoDebitoAdapter) {
+		return new InserirCartaoDebitoUseCase(inserirCartaoDebitoAdapter);
+	}
+}
