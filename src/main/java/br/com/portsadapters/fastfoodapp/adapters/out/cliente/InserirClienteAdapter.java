@@ -9,7 +9,6 @@ import br.com.portsadapters.fastfoodapp.adapters.out.repository.CartaoCreditoRep
 import br.com.portsadapters.fastfoodapp.adapters.out.repository.CartaoDebitoRepository;
 import br.com.portsadapters.fastfoodapp.adapters.out.repository.ClienteRepository;
 import br.com.portsadapters.fastfoodapp.adapters.out.repository.DinheiroRepository;
-import br.com.portsadapters.fastfoodapp.adapters.out.repository.FormaPagamentoRepository;
 import br.com.portsadapters.fastfoodapp.adapters.out.repository.entity.ClienteEntity;
 import br.com.portsadapters.fastfoodapp.adapters.out.repository.entity.pagamento.FormaPagamentoEntity;
 import br.com.portsadapters.fastfoodapp.adapters.out.repository.entity.pagamento.formas.CartaoCreditoEntity;
@@ -34,10 +33,6 @@ public class InserirClienteAdapter implements InserirClienteOutputPort {
 	@Autowired
 	private DinheiroRepository dinheiroRepository;
 
-	/*
-	 * @Autowired private FormaPagamentoRepository formaPagamentoRepository;
-	 */
-
 	@Autowired
 	private ClienteEntityMapper clienteEntityMapper;
 
@@ -52,7 +47,7 @@ public class InserirClienteAdapter implements InserirClienteOutputPort {
 
 		System.out.print(clienteSalvo);
 
-		for (FormaPagamentoEntity pagamento : clienteEntity.getFormasPagamento()) {
+		for (FormaPagamentoEntity pagamento : clienteSalvo.getFormasPagamento()) {
 
 			if (pagamento.getCartaoDebito() != null) {
 				pagamento.getCartaoDebito().setFormaPagamento(pagamento);
@@ -74,7 +69,6 @@ public class InserirClienteAdapter implements InserirClienteOutputPort {
 
 		}
 
-		clienteSalvo.getFormasPagamento();
 		clienteEntity.setId(clienteSalvo.getId());
 
 		return clienteSalvo;

@@ -2,6 +2,7 @@ package br.com.portsadapters.fastfoodapp.adapters.in.controller.response;
 
 import java.util.List;
 
+import br.com.portsadapters.fastfoodapp.application.core.domain.Cliente;
 import br.com.portsadapters.fastfoodapp.application.core.domain.Endereco;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +17,10 @@ public class EmpresaResponse extends BaseResponse {
 	
 	private String status;
 	
-    private List<Endereco> enderecos;
+    private List<EnderecoResponse> enderecos;
+    
+    private List<ClienteResponse> clientes;
+    
+    private Boolean ativo;
 
 }

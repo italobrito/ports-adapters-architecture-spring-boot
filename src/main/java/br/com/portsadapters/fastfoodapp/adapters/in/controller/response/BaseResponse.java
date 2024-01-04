@@ -8,6 +8,7 @@ import lombok.Setter;
 @Setter
 @MappedSuperclass
 abstract class BaseResponse {
+    private Long id;
     private String nome;
 }
 
