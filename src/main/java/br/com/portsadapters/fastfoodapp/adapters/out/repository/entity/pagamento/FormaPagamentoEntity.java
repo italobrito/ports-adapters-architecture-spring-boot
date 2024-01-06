@@ -1,10 +1,12 @@
 package br.com.portsadapters.fastfoodapp.adapters.out.repository.entity.pagamento;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import br.com.portsadapters.fastfoodapp.adapters.out.repository.entity.ClienteEntity;
+import br.com.portsadapters.fastfoodapp.adapters.out.repository.entity.PedidoEntity;
 import br.com.portsadapters.fastfoodapp.adapters.out.repository.entity.pagamento.formas.CartaoCreditoEntity;
 import br.com.portsadapters.fastfoodapp.adapters.out.repository.entity.pagamento.formas.CartaoDebitoEntity;
 import br.com.portsadapters.fastfoodapp.adapters.out.repository.entity.pagamento.formas.DinheiroEntity;
@@ -15,6 +17,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -36,19 +39,19 @@ public class FormaPagamentoEntity implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "cartao_debito_id")
-    @JsonBackReference
+	@OneToOne
+	@JoinColumn(name = "cartao_debito_id")
+	@JsonBackReference
 	private CartaoDebitoEntity cartaoDebito;
 
-    @OneToOne
-    @JoinColumn(name = "cartao_credito_id")
-    @JsonBackReference
+	@OneToOne
+	@JoinColumn(name = "cartao_credito_id")
+	@JsonBackReference
 	private CartaoCreditoEntity cartaoCredito;
 
-    @OneToOne
-    @JoinColumn(name = "dinheiro_id")
-    @JsonBackReference
+	@OneToOne
+	@JoinColumn(name = "dinheiro_id")
+	@JsonBackReference
 	private DinheiroEntity dinheiro;
 
 	private TipoPagamentoEnum tipoPagamento;
@@ -58,12 +61,12 @@ public class FormaPagamentoEntity implements Serializable {
 	@JsonBackReference
 	private ClienteEntity cliente;
 
-	/*
-	 * @OneToOne
-	 * 
-	 * @JoinColumn(name = "pedido_id")
-	 * 
-	 * @JsonBackReference private PedidoEntity pedido;
-	 */
+	@OneToOne
+	@JoinColumn(name = "pedido_id")
+	@JsonBackReference
+	private PedidoEntity pedido;
+	
+    @OneToMany(mappedBy = "formaPagamento")
+    private List<PagamentoEntity> pagamentos;
 
 }

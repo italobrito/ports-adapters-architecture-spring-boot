@@ -42,7 +42,7 @@ public class InserirPedidoUseCase implements InserirPedidoInputPort {
 
 	@Override
 	public PedidoEntity inserir(Pedido pedido) {
-		pedido.setStatus(TipoStatus.AGUARDANDO_CONFIRMACAO_EMPRESA);
+		pedido.setStatus(TipoStatus.RECEBIDO);
 		verificaEstoque(pedido);
 		reduzirInsumos(pedido);
 		return this.inserirPedidoOutputPort.inserir(pedido);

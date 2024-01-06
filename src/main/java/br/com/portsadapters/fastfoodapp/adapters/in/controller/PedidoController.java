@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import br.com.portsadapters.fastfoodapp.adapters.in.controller.mapper.PedidoMapper;
+import br.com.portsadapters.fastfoodapp.adapters.in.controller.mapper.PedidoMapperInterface;
 import br.com.portsadapters.fastfoodapp.adapters.in.controller.request.PedidoRequest;
 import br.com.portsadapters.fastfoodapp.adapters.out.repository.entity.PedidoEntity;
 import br.com.portsadapters.fastfoodapp.application.core.domain.Pedido;
@@ -31,22 +31,27 @@ import jakarta.validation.Valid;
 public class PedidoController {
 	@Autowired
 	private InserirPedidoInputPort inserirPedidoInputPort;
-	
+
 	@Autowired
 	private BuscarPedidoPorIdInputPort buscarPedidoPorIdInputPort;
-	
+
 	@Autowired
 	private BuscarPedidosInputPort buscarPedidosInputPort;
-	
+
 	@Autowired
 	private AtualizarPedidoStatusInputPort atualizarPedidoStatusInputPort;
 
+	/*
+	 * @Autowired private PedidoMapper pedidoMapper;
+	 */
+
 	@Autowired
-	private PedidoMapper pedidoMapper;
-	
+	private PedidoMapperInterface pedidoMapperInterface;
+
 	@Operation(summary = "Mudar o status do pedido.", description = "Atualiza os status do pedido")
 	@PatchMapping("/{id}")
-	public ResponseEntity<PedidoEntity> atualizarPedidoStatus(@PathVariable Long id, @RequestParam TipoStatus tipoStatus) {
+	public ResponseEntity<PedidoEntity> atualizarPedidoStatus(@PathVariable Long id,
+			@RequestParam TipoStatus tipoStatus) {
 		atualizarPedidoStatusInputPort.atualizarStatusPedido(id, tipoStatus);
 		return ResponseEntity.ok().build();
 	}
@@ -54,18 +59,22 @@ public class PedidoController {
 	@Operation(summary = "Inserir um pedido.", description = "Cria um pedido no seu status inicial")
 	@PostMapping
 	public ResponseEntity<PedidoEntity> inserir(@Valid @RequestBody PedidoRequest pedidoRequest) {
-		Pedido pedido = pedidoMapper.paraPedido(pedidoRequest);
+		
+		// Pedido pedido = pedidoMapper.paraPedido(pedidoRequest);
+		
+		Pedido pedido = pedidoMapperInterface.paraPedidoRequest(pedidoRequest);
+		
 		PedidoEntity pedidoSalvo = inserirPedidoInputPort.inserir(pedido);
 		return ResponseEntity.ok(pedidoSalvo);
 	}
-	
+
 	@Operation(summary = "Buscar pedido por Id", description = "Pesquisa um pedido através do seu id.")
 	@GetMapping("/{id}")
 	public ResponseEntity<PedidoEntity> buscarPorId(@PathVariable Long id) {
 		Optional<PedidoEntity> pedido = buscarPedidoPorIdInputPort.buscarPorId(id);
 		return ResponseEntity.ok(pedido.get());
 	}
-	
+
 	@Operation(summary = "Buscar todos os pedidos", description = "Pesquisa todos os pedidos.")
 	@GetMapping
 	public ResponseEntity<List<PedidoEntity>> buscarTodos() {

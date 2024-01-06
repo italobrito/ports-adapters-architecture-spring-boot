@@ -138,7 +138,9 @@ public class ClienteMapper {
 			clienteEntity.setEmpresa(empresaMapper.paraEmpresaEntiy(cliente.getEmpresa()));
 		}
 		clienteEntity.setEnderecos(enderecoMapper.paraEnderecoEntity(cliente.getEnderecos(), clienteEntity));
-		clienteEntity.setFormasPagamento(paraListaFormaPagamentoEntity(cliente.getFormasPagamento(), cliente));
+		if (cliente.getFormasPagamento() != null) {
+			clienteEntity.setFormasPagamento(paraListaFormaPagamentoEntity(cliente.getFormasPagamento(), cliente));
+		}
 		return clienteEntity;
 	}
 
