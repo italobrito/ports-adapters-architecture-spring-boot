@@ -39,15 +39,45 @@ public class InserirPedidoUseCase implements InserirPedidoInputPort {
 		this.atualizarInsumoOutputPort = atualizarInsumoOutputPort;
 	}
 	
-
 	@Override
 	public PedidoEntity inserir(Pedido pedido) {
 		pedido.setStatus(TipoStatus.RECEBIDO);
-		verificaEstoque(pedido);
-		reduzirInsumos(pedido);
+		if (!realizarPagamento(pedido)) {
+			throw new RuntimeException("Pagamento não realizado");
+		}
+		fluxoDoEstoque(pedido);
 		return this.inserirPedidoOutputPort.inserir(pedido);
 	}
 	
+	// TODO - Desenvolver os fluxos de pagamento
+	private boolean realizarPagamento(Pedido pedido) {
+		if (pedido.getPagamento().getFormaPagamento().getCartaoCredito() != null) {
+			executarFluxoCredito();
+		}
+		
+		if (pedido.getPagamento().getFormaPagamento().getCartaoDebito() != null) {
+			executarFluxoDebito();
+		}
+		
+		if (pedido.getPagamento().getFormaPagamento().getDinheiro() != null) {
+			return true;
+		}
+		return true;
+	}
+	
+	private void executarFluxoCredito() {
+		System.out.print("EXECUTOU O FLUXO DE CREDITO");
+	}
+	
+	private void executarFluxoDebito() {
+		System.out.print("EXECUTOU O FLUXO DE DEBITO");
+	}
+	
+	
+	private void fluxoDoEstoque(Pedido pedido) {
+		verificaEstoque(pedido);
+		reduzirInsumos(pedido);
+	}
 
 	private void verificaEstoque(Pedido pedido) {
 		Map<Long, Integer> totalInsumos = new HashMap<>();
@@ -74,7 +104,6 @@ public class InserirPedidoUseCase implements InserirPedidoInputPort {
 			}
 		}
 	}
-	
 	
 	private void reduzirInsumos(Pedido pedido) {
 	    Map<Long, Integer> insumoQuantidadeMap = new HashMap<>();
