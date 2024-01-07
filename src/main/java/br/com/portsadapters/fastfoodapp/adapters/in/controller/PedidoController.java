@@ -22,6 +22,7 @@ import br.com.portsadapters.fastfoodapp.application.core.domain.enums.TipoStatus
 import br.com.portsadapters.fastfoodapp.application.ports.in.pedido.AtualizarPedidoStatusInputPort;
 import br.com.portsadapters.fastfoodapp.application.ports.in.pedido.BuscarPedidoPorIdInputPort;
 import br.com.portsadapters.fastfoodapp.application.ports.in.pedido.BuscarPedidosInputPort;
+import br.com.portsadapters.fastfoodapp.application.ports.in.pedido.BuscarPedidosPorStatusInputPort;
 import br.com.portsadapters.fastfoodapp.application.ports.in.pedido.InserirPedidoInputPort;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
@@ -40,10 +41,9 @@ public class PedidoController {
 
 	@Autowired
 	private AtualizarPedidoStatusInputPort atualizarPedidoStatusInputPort;
-
-	/*
-	 * @Autowired private PedidoMapper pedidoMapper;
-	 */
+	
+	@Autowired
+	private BuscarPedidosPorStatusInputPort buscarPedidosPorStatusInputPort;
 
 	@Autowired
 	private PedidoMapperInterface pedidoMapperInterface;
@@ -59,11 +59,7 @@ public class PedidoController {
 	@Operation(summary = "Inserir um pedido.", description = "Cria um pedido no seu status inicial")
 	@PostMapping
 	public ResponseEntity<PedidoEntity> inserir(@Valid @RequestBody PedidoRequest pedidoRequest) {
-		
-		// Pedido pedido = pedidoMapper.paraPedido(pedidoRequest);
-		
 		Pedido pedido = pedidoMapperInterface.paraPedidoRequest(pedidoRequest);
-		
 		PedidoEntity pedidoSalvo = inserirPedidoInputPort.inserir(pedido);
 		return ResponseEntity.ok(pedidoSalvo);
 	}
@@ -79,6 +75,13 @@ public class PedidoController {
 	@GetMapping
 	public ResponseEntity<List<PedidoEntity>> buscarTodos() {
 		List<PedidoEntity> pedidos = buscarPedidosInputPort.buscarTodos();
+		return ResponseEntity.ok().body(pedidos);
+	}
+	
+	@Operation(summary = "Buscar pedidos por status", description = "Pesquisa por status")
+	@GetMapping("/status")
+	public ResponseEntity<List<PedidoEntity>> buscarPedidosPorStatus(@RequestParam TipoStatus tipoStatus) {
+		List<PedidoEntity> pedidos = buscarPedidosPorStatusInputPort.buscarPedidosPorStatus(tipoStatus);
 		return ResponseEntity.ok().body(pedidos);
 	}
 }

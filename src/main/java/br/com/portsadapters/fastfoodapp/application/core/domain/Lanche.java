@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.portsadapters.fastfoodapp.application.core.domain.enums.TipoLanche;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,5 +24,7 @@ public class Lanche  extends Base implements Serializable {
     private List<Insumo> insumos = new ArrayList<>();
     
     private BigDecimal preco;
+    
+    private TipoLanche tipoLanche;
 
 }

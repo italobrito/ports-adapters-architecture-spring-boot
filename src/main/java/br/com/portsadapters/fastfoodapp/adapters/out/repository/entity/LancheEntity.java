@@ -4,7 +4,10 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
+import br.com.portsadapters.fastfoodapp.application.core.domain.enums.TipoLanche;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
@@ -33,5 +36,8 @@ public class LancheEntity extends BaseEntity implements Serializable {
     private List<InsumoEntity> insumos;
     
     private BigDecimal preco;
+    
+	@Enumerated(EnumType.STRING)
+    private TipoLanche tipoLanche;
 
 }

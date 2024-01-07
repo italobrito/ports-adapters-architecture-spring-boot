@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.portsadapters.fastfoodapp.application.core.domain.enums.TipoLanche;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,5 +17,7 @@ public class LancheResponse extends BaseResponse {
     private List<InsumoResponse> insumos = new ArrayList<>();
     
 	private BigDecimal preco;
+	
+    private TipoLanche tipoLanche;
 	
 }

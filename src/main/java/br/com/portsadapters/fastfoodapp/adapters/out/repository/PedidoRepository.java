@@ -1,5 +1,7 @@
 package br.com.portsadapters.fastfoodapp.adapters.out.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -15,9 +17,12 @@ public interface PedidoRepository extends JpaRepository<PedidoEntity, Long> {
 	@Transactional
 	@Query(value = "update pedido_entity u set u.status = :status WHERE u.id = :id", nativeQuery = true)
 	int atualizarStatus(@Param(value = "id") Long id, @Param(value = "status") String status);
-	
+
 	@Modifying
 	@Transactional
 	@Query(value = "update pedido_entity u set u.pagamento_id = :pagamento_id WHERE u.id = :id", nativeQuery = true)
 	int pagamentoId(@Param(value = "pagamento_id") Long pagamento_id, @Param(value = "id") Long id);
+
+	@Query(value = "SELECT * FROM pedido_entity WHERE status = :status", nativeQuery = true)
+	List<PedidoEntity> buscarPedidosPorStatus(@Param(value = "status") String status);
 }
