@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.portsadapters.fastfoodapp.adapters.in.controller.mapper.LancheMapper;
@@ -18,9 +19,11 @@ import br.com.portsadapters.fastfoodapp.adapters.in.controller.request.LancheReq
 import br.com.portsadapters.fastfoodapp.adapters.in.controller.response.LancheResponse;
 import br.com.portsadapters.fastfoodapp.adapters.out.repository.entity.LancheEntity;
 import br.com.portsadapters.fastfoodapp.application.core.domain.Lanche;
+import br.com.portsadapters.fastfoodapp.application.core.domain.enums.TipoLanche;
 import br.com.portsadapters.fastfoodapp.application.ports.in.lanche.AtualizarLancheInputPort;
 import br.com.portsadapters.fastfoodapp.application.ports.in.lanche.BuscarLanchePorIdInputPort;
 import br.com.portsadapters.fastfoodapp.application.ports.in.lanche.BuscarLanchesInputPort;
+import br.com.portsadapters.fastfoodapp.application.ports.in.lanche.BuscarLanchesPorTipoInputPort;
 import br.com.portsadapters.fastfoodapp.application.ports.in.lanche.InserirLancheInputPort;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
@@ -34,6 +37,9 @@ public class LancheController {
 
 	@Autowired
 	private BuscarLanchePorIdInputPort buscarLanchePorIdInputPort;
+	
+	@Autowired
+	private BuscarLanchesPorTipoInputPort buscarLanchesPorTipoInputPort;
 	
 	@Autowired
 	private BuscarLanchesInputPort buscarLanchesInputPort;
@@ -73,6 +79,14 @@ public class LancheController {
 	@GetMapping
 	public ResponseEntity<List<LancheEntity>> buscarTodos() {
 		List<LancheEntity> lanches = buscarLanchesInputPort.buscarTodos();
+		return ResponseEntity.ok().body(lanches);
+	}
+	
+	
+	@Operation(summary = "Buscar lanches por categoria", description = "Pesquisa lanches aplicando filtro de tipo")
+	@GetMapping("/status")
+	public ResponseEntity<List<LancheEntity>> buscarPedidosPorStatus(@RequestParam TipoLanche lipoLanche) {
+		List<LancheEntity> lanches = buscarLanchesPorTipoInputPort.buscarLanchesPorTipo(lipoLanche);
 		return ResponseEntity.ok().body(lanches);
 	}
 
