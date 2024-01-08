@@ -64,7 +64,7 @@ public class ClienteController {
 		return ResponseEntity.ok().body(clientes);
 	}
 	
-	@Operation(summary = "Edita um cliente.", description = "Edita um cliente e retorna o objeto editado.")
+	@Operation(summary = "Editar um cliente.", description = "Edita um cliente e retorna o objeto editado.")
     @PutMapping("/{id}")
     public ResponseEntity<ClienteEntity> update(@PathVariable final Long id, @Valid @RequestBody ClienteRequest clienteRequest) {
         Cliente cliente = clienteMapper.paraCliente(clienteRequest);

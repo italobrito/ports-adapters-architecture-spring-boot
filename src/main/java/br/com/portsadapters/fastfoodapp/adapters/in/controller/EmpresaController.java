@@ -53,7 +53,7 @@ public class EmpresaController {
 		return ResponseEntity.ok(empresaEntity);
 	}
 	
-	@Operation(summary = "Edita uma empresa.", description = "Edita uma empresa e retorna o objeto editado.")
+	@Operation(summary = "Editar uma empresa.", description = "Edita uma empresa e retorna o objeto editado.")
     @PutMapping("/{id}")
     public ResponseEntity<EmpresaEntity> update(@PathVariable final Long id, @Valid @RequestBody EmpresaRequest empresaRequest) {
 		Empresa empresa = empresaMapper.paraEmpresa(empresaRequest);

@@ -52,7 +52,7 @@ public class InsumoController {
 		return ResponseEntity.ok(insumoCriado);
 	}
 	
-	@Operation(summary = "Edita um insumo.", description = "Edita um insumo e retorna o objeto editado.")
+	@Operation(summary = "Editar um insumo.", description = "Edita um insumo e retorna o objeto editado.")
     @PutMapping("/{id}")
     public ResponseEntity<InsumoEntity> update(@PathVariable final Long id, @Valid @RequestBody InsumoRequest insumoRequest) {
         Insumo insumo = insumoMapper.paraInsumo(insumoRequest);
