@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import br.com.portsadapters.fastfoodapp.adapters.in.controller.request.EnderecoRequest;
+import br.com.portsadapters.fastfoodapp.adapters.in.controller.response.EnderecoResponse;
 import br.com.portsadapters.fastfoodapp.adapters.out.repository.entity.ClienteEntity;
 import br.com.portsadapters.fastfoodapp.adapters.out.repository.entity.EmpresaEntity;
 import br.com.portsadapters.fastfoodapp.adapters.out.repository.entity.EnderecoEntity;
@@ -44,6 +45,20 @@ public class EnderecoMapper {
 		enderecoEntity.setNumero(enderecoRequest.getNumero());
 		enderecoEntity.setComplemento(enderecoRequest.getComplemento());
 		return enderecoEntity;
+	}
+	
+	public List<EnderecoResponse> paraEnderecoResponse(List<EnderecoEntity> enderecoEntities) {
+	    List<EnderecoResponse> enderecoResponses = new ArrayList<>();
+	    for (EnderecoEntity enderecoEntity : enderecoEntities) {
+	        EnderecoResponse enderecoResponse = new EnderecoResponse();
+	        enderecoResponse.setId(enderecoEntity.getId());
+	        enderecoResponse.setRua(enderecoEntity.getRua());
+	        enderecoResponse.setCep(enderecoEntity.getCep());
+	        enderecoResponse.setNumero(enderecoEntity.getNumero());
+	        enderecoResponse.setComplemento(enderecoEntity.getComplemento());
+	        enderecoResponses.add(enderecoResponse);
+	    }
+	    return enderecoResponses;
 	}
 
 	public List<EnderecoEntity> paraListaEnderecoEntity(List<EnderecoRequest> enderecosRequest) {

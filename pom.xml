@@ -90,14 +90,6 @@
 
 	</dependencies>
 
-	<!--    <repositories>
-        <repository>
-            <id>jcenter</id>
-            <url>https://jcenter.bintray.com/</url>
-        </repository>
-    </repositories>-->
-
-
 	<build>
 		<plugins>
 
@@ -152,12 +144,12 @@
 
 					</annotationProcessorPaths>
 
-			         <compilerArgs>
-			             <compilerArg>
-			                 -Amapstruct.defaultComponentModel=spring
-			             </compilerArg>
-			         </compilerArgs>
-			         
+					<compilerArgs>
+						<compilerArg>
+							-Amapstruct.defaultComponentModel=spring
+						</compilerArg>
+					</compilerArgs>
+
 				</configuration>
 
 			</plugin>

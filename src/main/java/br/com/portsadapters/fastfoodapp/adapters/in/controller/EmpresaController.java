@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 import br.com.portsadapters.fastfoodapp.adapters.in.controller.mapper.EmpresaMapper;
 import br.com.portsadapters.fastfoodapp.adapters.in.controller.request.EmpresaRequest;
+import br.com.portsadapters.fastfoodapp.adapters.in.controller.response.EmpresaResponse;
 import br.com.portsadapters.fastfoodapp.adapters.out.repository.entity.EmpresaEntity;
 import br.com.portsadapters.fastfoodapp.application.core.domain.Empresa;
 import br.com.portsadapters.fastfoodapp.application.ports.in.empresa.InserirEmpresaInputPort;
@@ -42,6 +43,7 @@ public class EmpresaController {
 
 	@Autowired
 	private EmpresaMapper empresaMapper;
+	
 
 	@Operation(summary = "Insere uma empresa.", description = "Insere uma empresa e suas associações.")
 	@PostMapping
@@ -62,9 +64,10 @@ public class EmpresaController {
 
 	@Operation(summary = "Buscar todas as empresas cadastradas.", description = "Pesquisa todas as empresas.")
 	@GetMapping
-	public ResponseEntity<List<EmpresaEntity>> buscarTodos() {
+	public ResponseEntity<List<EmpresaResponse>> buscarTodos() {
 		List<EmpresaEntity> empresas = buscarEmpresasInputPort.buscarTodos();
-		return ResponseEntity.ok().body(empresas);
+		List<EmpresaResponse> empresaResponse = empresaMapper.paraEmpresaResponse(empresas);
+		return ResponseEntity.ok().body(empresaResponse);
 	}
 
 	@Operation(summary = "Buscar empresa por Id", description = "Pesquisa uma empresa através do id.")

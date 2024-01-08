@@ -26,20 +26,21 @@ public class LancheMapper {
 
 		List<InsumoResponse> insumos = new ArrayList<>();
 
-		for (InsumoEntity insumoEntity : lancheEntity.getInsumos()) {
+		if (lancheEntity.getInsumos() != null) {
+			for (InsumoEntity insumoEntity : lancheEntity.getInsumos()) {
 
-			InsumoResponse insumoCriado = new InsumoResponse();
+				InsumoResponse insumoCriado = new InsumoResponse();
 
-			insumoCriado.setId(insumoEntity.getId());
-			insumoCriado.setNome(insumoEntity.getNome());
-			insumoCriado.setQuantidade(insumoEntity.getQuantidade());
-			insumoCriado.setPesoEmGramas(insumoEntity.getPesoEmGramas());
+				insumoCriado.setId(insumoEntity.getId());
+				insumoCriado.setNome(insumoEntity.getNome());
+				insumoCriado.setQuantidade(insumoEntity.getQuantidade());
+				insumoCriado.setPesoEmGramas(insumoEntity.getPesoEmGramas());
 
-			insumos.add(insumoCriado);
+				insumos.add(insumoCriado);
+			}
 		}
 
 		lancheResponse.setInsumos(insumos);
-
 		return lancheResponse;
 	}
 
@@ -53,18 +54,20 @@ public class LancheMapper {
 
 		List<Insumo> insumos = new ArrayList<>();
 
-		for (InsumoRequest insumoRequest : lancheRequest.getInsumos()) {
+		if (lancheRequest.getInsumos() != null) {
+			for (InsumoRequest insumoRequest : lancheRequest.getInsumos()) {
 
-			Insumo insumoCriado = new Insumo();
+				Insumo insumoCriado = new Insumo();
 
-			insumoCriado.setId(insumoRequest.getId());
-			insumoCriado.setNome(insumoRequest.getNome());
-			insumoCriado.setPreco(insumoRequest.getPreco());
-			insumoCriado.setQuantidade(insumoRequest.getQuantidade());
-			insumoCriado.setImagem(insumoRequest.getImagem());
-			insumoCriado.setPesoEmGramas(insumoRequest.getPesoEmGramas());
+				insumoCriado.setId(insumoRequest.getId());
+				insumoCriado.setNome(insumoRequest.getNome());
+				insumoCriado.setPreco(insumoRequest.getPreco());
+				insumoCriado.setQuantidade(insumoRequest.getQuantidade());
+				insumoCriado.setImagem(insumoRequest.getImagem());
+				insumoCriado.setPesoEmGramas(insumoRequest.getPesoEmGramas());
 
-			insumos.add(insumoCriado);
+				insumos.add(insumoCriado);
+			}
 		}
 
 		lanche.setInsumos(insumos);
@@ -84,17 +87,19 @@ public class LancheMapper {
 
 			List<Insumo> insumos = new ArrayList<>();
 
-			for (InsumoRequest insumoRequest : lancheRequest.getInsumos()) {
-				Insumo insumoCriado = new Insumo();
+			if (lancheRequest.getInsumos() != null) {
+				for (InsumoRequest insumoRequest : lancheRequest.getInsumos()) {
+					Insumo insumoCriado = new Insumo();
 
-				insumoCriado.setId(insumoRequest.getId());
-				insumoCriado.setNome(insumoRequest.getNome());
-				insumoCriado.setPreco(insumoRequest.getPreco());
-				insumoCriado.setQuantidade(insumoRequest.getQuantidade());
-				insumoCriado.setImagem(insumoRequest.getImagem());
-				insumoCriado.setPesoEmGramas(insumoRequest.getPesoEmGramas());
+					insumoCriado.setId(insumoRequest.getId());
+					insumoCriado.setNome(insumoRequest.getNome());
+					insumoCriado.setPreco(insumoRequest.getPreco());
+					insumoCriado.setQuantidade(insumoRequest.getQuantidade());
+					insumoCriado.setImagem(insumoRequest.getImagem());
+					insumoCriado.setPesoEmGramas(insumoRequest.getPesoEmGramas());
 
-				insumos.add(insumoCriado);
+					insumos.add(insumoCriado);
+				}
 			}
 
 			lanche.setInsumos(insumos);
@@ -114,22 +119,23 @@ public class LancheMapper {
 
 		List<InsumoEntity> insumos = new ArrayList<>();
 
-		for (Insumo insumo : lanche.getInsumos()) {
+		if (lanche.getInsumos() != null) {
+			for (Insumo insumo : lanche.getInsumos()) {
 
-			InsumoEntity insumoCriado = new InsumoEntity();
+				InsumoEntity insumoCriado = new InsumoEntity();
 
-			insumoCriado.setId(insumo.getId());
-			insumoCriado.setNome(insumo.getNome());
-			insumoCriado.setPreco(insumo.getPreco());
-			insumoCriado.setQuantidade(insumo.getQuantidade());
-			insumoCriado.setImagem(insumo.getImagem());
-			insumoCriado.setPesoEmGramas(insumo.getPesoEmGramas());
+				insumoCriado.setId(insumo.getId());
+				insumoCriado.setNome(insumo.getNome());
+				insumoCriado.setPreco(insumo.getPreco());
+				insumoCriado.setQuantidade(insumo.getQuantidade());
+				insumoCriado.setImagem(insumo.getImagem());
+				insumoCriado.setPesoEmGramas(insumo.getPesoEmGramas());
 
-			insumos.add(insumoCriado);
+				insumos.add(insumoCriado);
+			}
 		}
 
 		lancheEntity.setInsumos(insumos);
-
 		return lancheEntity;
 	}
 

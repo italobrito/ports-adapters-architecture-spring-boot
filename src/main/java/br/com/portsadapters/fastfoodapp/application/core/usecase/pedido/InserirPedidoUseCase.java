@@ -85,11 +85,14 @@ public class InserirPedidoUseCase implements InserirPedidoInputPort {
 		for (ItemPedido itemPedido : pedido.getItemsPedido()) {
 			Lanche lanche = itemPedido.getLanches();
 
-			for (Insumo insumo : lanche.getInsumos()) {
-				long insumoId = insumo.getId();
-				int quantidadeAtual = totalInsumos.getOrDefault(insumoId, 0);
-				totalInsumos.put(insumoId, quantidadeAtual + insumo.getQuantidade() * itemPedido.getQuantidade());
+			if (lanche.getInsumos() != null) {
+				for (Insumo insumo : lanche.getInsumos()) {
+					long insumoId = insumo.getId();
+					int quantidadeAtual = totalInsumos.getOrDefault(insumoId, 0);
+					totalInsumos.put(insumoId, quantidadeAtual + insumo.getQuantidade() * itemPedido.getQuantidade());
+				}
 			}
+			
 		}
 
 		for (Map.Entry<Long, Integer> entry : totalInsumos.entrySet()) {
@@ -111,13 +114,14 @@ public class InserirPedidoUseCase implements InserirPedidoInputPort {
 	    for (ItemPedido itemPedido : pedido.getItemsPedido()) {
 	        Lanche lanche = itemPedido.getLanches();
 
-	        for (Insumo insumo : lanche.getInsumos()) {
-	        	
-	            long insumoId = insumo.getId();
-	            int quantidadeNecessaria = insumo.getQuantidade() * itemPedido.getQuantidade();
-	            insumoQuantidadeMap.put(insumoId, insumoQuantidadeMap.getOrDefault(insumoId, 0) + quantidadeNecessaria);
-	            
+	        if (lanche.getInsumos() != null) {
+	        	for (Insumo insumo : lanche.getInsumos()) {
+	        		long insumoId = insumo.getId();
+	        		int quantidadeNecessaria = insumo.getQuantidade() * itemPedido.getQuantidade();
+	        		insumoQuantidadeMap.put(insumoId, insumoQuantidadeMap.getOrDefault(insumoId, 0) + quantidadeNecessaria);
+	        	}
 	        }
+	        
 	    }
 
 	    for (Map.Entry<Long, Integer> entry : insumoQuantidadeMap.entrySet()) {

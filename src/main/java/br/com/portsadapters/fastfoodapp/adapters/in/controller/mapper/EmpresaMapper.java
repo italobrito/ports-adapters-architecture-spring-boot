@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import br.com.portsadapters.fastfoodapp.adapters.in.controller.request.ClienteRequest;
 import br.com.portsadapters.fastfoodapp.adapters.in.controller.request.EmpresaRequest;
+import br.com.portsadapters.fastfoodapp.adapters.in.controller.response.EmpresaResponse;
 import br.com.portsadapters.fastfoodapp.adapters.out.repository.entity.ClienteEntity;
 import br.com.portsadapters.fastfoodapp.adapters.out.repository.entity.EmpresaEntity;
 import br.com.portsadapters.fastfoodapp.adapters.out.repository.entity.EnderecoEntity;
@@ -78,7 +79,6 @@ public class EmpresaMapper {
         return clientesEntity;
     }
     
-	
     private Cliente paraCliente(ClienteEntity clienteEntity) {
         Cliente cliente = new Cliente();
         cliente.setId(clienteEntity.getId());
@@ -239,4 +239,27 @@ public class EmpresaMapper {
         return empresa;
     }
 	
+    
+    public List<EmpresaResponse> paraEmpresaResponse(List<EmpresaEntity> empresaEntity) {
+    	
+    	List<EmpresaResponse> empresasResponse =  new ArrayList<>();
+    	
+        for (EmpresaEntity empresa : empresaEntity) {
+        	
+        	EmpresaResponse empresaResponse = new EmpresaResponse();
+        	
+        	empresaResponse.setId(empresa.getId());
+        	empresaResponse.setNome(empresa.getNome());
+        	empresaResponse.setCnpj(empresa.getCnpj());
+        	
+            if (empresaResponse.getEnderecos() != null) {
+            	empresaResponse.setEnderecos(enderecoMapper.paraEnderecoResponse(empresa.getEnderecos()));
+            }
+            
+            empresasResponse.add(empresaResponse);
+        }
+        
+    	return empresasResponse;
+    }
+    
 }
