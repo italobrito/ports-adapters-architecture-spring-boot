@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import br.com.portsadapters.fastfoodapp.adapters.in.controller.request.ClienteRequest;
 import br.com.portsadapters.fastfoodapp.adapters.in.controller.request.EmpresaRequest;
+import br.com.portsadapters.fastfoodapp.adapters.in.controller.response.ClienteResponse;
 import br.com.portsadapters.fastfoodapp.adapters.in.controller.response.EmpresaResponse;
 import br.com.portsadapters.fastfoodapp.adapters.out.repository.entity.ClienteEntity;
 import br.com.portsadapters.fastfoodapp.adapters.out.repository.entity.EmpresaEntity;
@@ -108,6 +109,21 @@ public class EmpresaMapper {
             clientes.add(cliente);
         }
         return clientes;
+    }
+    
+    public List<ClienteResponse> paraClienteResponse(List<ClienteEntity> clienteEntities) {
+        List<ClienteResponse> clienteResponses = new ArrayList<>();
+        for (ClienteEntity clienteEntity : clienteEntities) {
+            ClienteResponse clienteResponse = new ClienteResponse();
+            clienteResponse.setId(clienteEntity.getId());
+            clienteResponse.setNome(clienteEntity.getNome());
+            clienteResponse.setCpfCnpj(clienteEntity.getCpfCnpj());
+            if (clienteEntity.getEnderecos() != null) {
+                clienteResponse.setEnderecos(enderecoMapper.paraEnderecoResponse(clienteEntity.getEnderecos()));
+            }
+            clienteResponses.add(clienteResponse);
+        }
+        return clienteResponses;
     }
 	
 	/*
@@ -251,9 +267,14 @@ public class EmpresaMapper {
         	empresaResponse.setId(empresa.getId());
         	empresaResponse.setNome(empresa.getNome());
         	empresaResponse.setCnpj(empresa.getCnpj());
+        	empresaResponse.setAtivo(empresa.getAtivo());
         	
-            if (empresaResponse.getEnderecos() != null) {
+            if (empresa.getEnderecos() != null) {
             	empresaResponse.setEnderecos(enderecoMapper.paraEnderecoResponse(empresa.getEnderecos()));
+            }
+            
+            if (empresa.getClientes() != null) {
+            	empresaResponse.setClientes(paraClienteResponse(empresa.getClientes()));
             }
             
             empresasResponse.add(empresaResponse);
@@ -261,5 +282,25 @@ public class EmpresaMapper {
         
     	return empresasResponse;
     }
+    
+    public EmpresaResponse paraEmpresaResponse(EmpresaEntity empresaEntity) {
+        EmpresaResponse empresaResponse = new EmpresaResponse();
+
+        empresaResponse.setId(empresaEntity.getId());
+        empresaResponse.setNome(empresaEntity.getNome());
+        empresaResponse.setCnpj(empresaEntity.getCnpj());
+        empresaResponse.setAtivo(empresaEntity.getAtivo());
+
+        if (empresaEntity.getEnderecos() != null) {
+            empresaResponse.setEnderecos(enderecoMapper.paraEnderecoResponse(empresaEntity.getEnderecos()));
+        }
+
+        if (empresaEntity.getClientes() != null) {
+            empresaResponse.setClientes(paraClienteResponse(empresaEntity.getClientes()));
+        }
+
+        return empresaResponse;
+    }
+
     
 }

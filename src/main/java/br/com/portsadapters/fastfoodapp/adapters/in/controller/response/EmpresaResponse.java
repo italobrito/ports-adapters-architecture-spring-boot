@@ -13,8 +13,6 @@ public class EmpresaResponse extends BaseResponse {
 
 	private String cnpj;
 	
-	private String status;
-	
     private List<EnderecoResponse> enderecos;
     
     private List<ClienteResponse> clientes;

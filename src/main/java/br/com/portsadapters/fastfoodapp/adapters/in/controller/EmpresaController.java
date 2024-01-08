@@ -72,9 +72,10 @@ public class EmpresaController {
 
 	@Operation(summary = "Buscar empresa por Id", description = "Pesquisa uma empresa através do id.")
 	@GetMapping("/{id}")
-	public ResponseEntity<EmpresaEntity> buscarPorId(@PathVariable Long id) {
+	public ResponseEntity<EmpresaResponse> buscarPorId(@PathVariable Long id) {
 		Optional<EmpresaEntity> empresa = buscarEmpresaPorIdInputPort.buscarPorId(id);
-		return ResponseEntity.ok(empresa.get());
+		EmpresaResponse empresaResponse = empresaMapper.paraEmpresaResponse(empresa.get());
+		return ResponseEntity.ok(empresaResponse);
 	}
 
 }
