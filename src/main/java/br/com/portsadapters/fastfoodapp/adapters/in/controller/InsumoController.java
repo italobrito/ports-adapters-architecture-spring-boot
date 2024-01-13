@@ -46,7 +46,6 @@ public class InsumoController {
 	@Operation(summary = "Inserir um insumo para compor os lanches.", description = "Insere um insumo/ingrediente.")
 	@PostMapping
 	public ResponseEntity<InsumoEntity> inserir(@Valid @RequestBody InsumoRequest insumoRequest) {
-		System.out.print(insumoRequest);
 		Insumo insumo = insumoMapper.paraInsumo(insumoRequest);
 		InsumoEntity insumoCriado = inserirInsumoInputPort.inserir(insumo);
 		return ResponseEntity.ok(insumoCriado);

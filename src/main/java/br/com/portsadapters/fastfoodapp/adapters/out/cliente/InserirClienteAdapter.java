@@ -45,8 +45,6 @@ public class InserirClienteAdapter implements InserirClienteOutputPort {
 
 		ClienteEntity clienteSalvo = clienteRepository.save(clienteEntity);
 
-		System.out.print(clienteSalvo);
-
 		for (FormaPagamentoEntity pagamento : clienteSalvo.getFormasPagamento()) {
 
 			if (pagamento.getCartaoDebito() != null) {

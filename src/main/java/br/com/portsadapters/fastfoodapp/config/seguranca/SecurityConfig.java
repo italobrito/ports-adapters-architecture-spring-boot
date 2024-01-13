@@ -24,17 +24,15 @@ public class SecurityConfig {
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
 		return http.csrf(csrf -> csrf.disable())
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+				.authorizeHttpRequests(
+						authorize -> authorize.requestMatchers("/swagger-ui/**", "/v3/api-docs/**","/swagger-ui.html").permitAll())
 				.authorizeHttpRequests(
 						authorize -> authorize.requestMatchers(HttpMethod.POST, "/auth/realizar-login").permitAll())
 				.authorizeHttpRequests(
 						authorize -> authorize.requestMatchers(HttpMethod.POST, "/auth/cadastrar-usuario").permitAll())
-				/*
-				 * .authorizeHttpRequests( authorize ->
-				 * authorize.requestMatchers(HttpMethod.GET, "/api/v1/empresa"))
-				 */
+				.authorizeHttpRequests(authorize -> authorize.requestMatchers(HttpMethod.GET, "/api/v1/empresa").hasRole("ADMIN"))
 				.authorizeHttpRequests(authorize -> authorize.anyRequest().authenticated())
 				.addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class).build();
 	}

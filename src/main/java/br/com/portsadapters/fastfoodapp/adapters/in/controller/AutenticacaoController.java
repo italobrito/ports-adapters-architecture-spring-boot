@@ -17,10 +17,10 @@ import br.com.portsadapters.fastfoodapp.adapters.in.controller.response.usuario.
 import br.com.portsadapters.fastfoodapp.adapters.out.repository.UsuarioRepository;
 import br.com.portsadapters.fastfoodapp.adapters.out.repository.entity.usuario.UsuarioEntity;
 import br.com.portsadapters.fastfoodapp.config.seguranca.TokenService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 
 @RestController
-
 @RequestMapping("auth")
 public class AutenticacaoController {
 
@@ -33,6 +33,7 @@ public class AutenticacaoController {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 
+	@Operation(summary = "Faça seu login.", description = "Faz login de usuário.")
 	@PostMapping("/realizar-login")
 	public ResponseEntity<DadosToken> efetuarLogin(@RequestBody @Valid AutenticacaoResponse dados) {
 		var token = new UsernamePasswordAuthenticationToken(dados.getLogin(), dados.getPassword());
@@ -41,13 +42,13 @@ public class AutenticacaoController {
 		return ResponseEntity.ok(new DadosToken(tokenJWT));
 	}
 
+	@Operation(summary = "Cadastra um usuário.", description = "Cadastra usuário com role (ADMIN, USER, COZINHA)")
 	@PostMapping("/cadastrar-usuario")
 	public ResponseEntity<UsuarioEntity> cadastrarUsuario(@RequestBody @Valid UsuarioRequest data) {
 		if (this.usuarioRepository.findByLogin(data.getLogin()) != null)
 			return ResponseEntity.badRequest().build();
 		String encryptedPassword = new BCryptPasswordEncoder().encode(data.getPassword());
 		UsuarioEntity newUser = new UsuarioEntity(data.getLogin(), encryptedPassword, data.getRole().toString());
-		System.out.print(newUser);
 		this.usuarioRepository.save(newUser);
 		return ResponseEntity.ok(newUser);
 	}

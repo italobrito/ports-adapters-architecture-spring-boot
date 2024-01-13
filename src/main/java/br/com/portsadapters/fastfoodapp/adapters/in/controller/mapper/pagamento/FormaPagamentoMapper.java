@@ -35,20 +35,12 @@ public class FormaPagamentoMapper {
 
 	@Autowired
 	private DinheiroMapper dinheiroMapper;
-	
+
 	@Autowired
 	private EnderecoMapper enderecoMapper;
-	
+
 	@Autowired
 	private EmpresaMapper empresaMapper;
-
-	/*
-	 * @Autowired private ClienteMapper clienteMapper;
-	 */
-
-	/*
-	 * @Autowired private PedidoMapper pedidoMapper;
-	 */
 
 	public List<FormaPagamento> paraListaFormaPagamento(List<FormaPagamentoRequest> formasPagamentoRequest,
 			Cliente cliente) {
@@ -63,7 +55,6 @@ public class FormaPagamentoMapper {
 				formaPagamento.setCartaoDebito(cartaoDebito);
 				formaPagamento.setTipoPagamento(formaPagamentoRequest.getTipoPagamento());
 				formaPagamento.setCliente(cliente);
-				/* formaPagamento.setPedido(pedido); */
 				formasPagamento.add(formaPagamento);
 			}
 
@@ -74,7 +65,6 @@ public class FormaPagamentoMapper {
 				formaPagamento.setCartaoCredito(cartaoCredito);
 				formaPagamento.setTipoPagamento(formaPagamentoRequest.getTipoPagamento());
 				formaPagamento.setCliente(cliente);
-				/* formaPagamento.setPedido(pedido); */
 				formasPagamento.add(formaPagamento);
 			}
 
@@ -84,7 +74,6 @@ public class FormaPagamentoMapper {
 				formaPagamento.setDinheiro(dinheiro);
 				formaPagamento.setTipoPagamento(formaPagamentoRequest.getTipoPagamento());
 				formaPagamento.setCliente(cliente);
-				/* formaPagamento.setPedido(pedido); */
 				formasPagamento.add(formaPagamento);
 			}
 		}
@@ -131,8 +120,6 @@ public class FormaPagamentoMapper {
 		FormaPagamento formaPagamento = new FormaPagamento();
 		formaPagamento.setId(formaPagamentoRequest.getId());
 		formaPagamento.setTipoPagamento(formaPagamentoRequest.getTipoPagamento());
-		// formaPagamento.setCliente(paraCliente(formaPagamentoRequest.getCliente()));
-		// formaPagamento.setPedido(pedidoMapper.paraPedido(formaPagamentoRequest.getPedido()));
 		formaPagamento.setDinheiro(dinheiroMapper.paraDinheiro(formaPagamentoRequest.getDinheiro()));
 		formaPagamento.setTipoPagamento(formaPagamentoRequest.getTipoPagamento());
 		formaPagamento
@@ -142,9 +129,9 @@ public class FormaPagamentoMapper {
 	}
 
 	public FormaPagamentoEntity paraFormaPagamentoEntity(FormaPagamento formaPagamento) {
-		
+
 		FormaPagamentoEntity formaPagamentoEntity = new FormaPagamentoEntity();
-		
+
 		formaPagamentoEntity.setId(formaPagamento.getId());
 		formaPagamentoEntity.setTipoPagamento(formaPagamento.getTipoPagamento());
 
@@ -181,12 +168,9 @@ public class FormaPagamentoMapper {
 
 		formaPagamentoEntity.setCliente(paraClienteEntity(formaPagamento.getCliente()));
 
-		// Configurar o pedido, se necessário
-		// formaPagamentoEntity.setPedido(pedidoMapper.paraPedidoEntity(formaPagamento.getPedido()));
-
 		return formaPagamentoEntity;
 	}
-	
+
 	public ClienteEntity paraClienteEntity(Cliente cliente) {
 		ClienteEntity clienteEntity = new ClienteEntity();
 		clienteEntity.setId(cliente.getId());
@@ -199,7 +183,7 @@ public class FormaPagamentoMapper {
 		clienteEntity.setFormasPagamento(paraListaFormaPagamentoEntity(cliente.getFormasPagamento(), cliente));
 		return clienteEntity;
 	}
-	
+
 	private List<FormaPagamentoEntity> paraListaFormaPagamentoEntity(List<FormaPagamento> formasPagamento,
 			Cliente cliente) {
 

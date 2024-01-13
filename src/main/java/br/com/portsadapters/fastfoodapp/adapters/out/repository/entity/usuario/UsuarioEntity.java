@@ -43,10 +43,14 @@ public class UsuarioEntity implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		if (this.role == TipoUsuario.ADMIN.toString())
-			return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
-		else
+		if (this.role.equals(TipoUsuario.ADMIN.name())) {
+			return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"),
+					new SimpleGrantedAuthority("ROLE_COZINHA"));
+		} else if (this.role.equals(TipoUsuario.COZINHA.name())) {
+			return List.of(new SimpleGrantedAuthority("ROLE_COZINHA"));
+		} else {
 			return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+		}
 	}
 
 	@Override

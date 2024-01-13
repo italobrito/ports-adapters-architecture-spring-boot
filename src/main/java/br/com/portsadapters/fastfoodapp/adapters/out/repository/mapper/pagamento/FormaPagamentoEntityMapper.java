@@ -25,8 +25,6 @@ import br.com.portsadapters.fastfoodapp.application.core.domain.pagamento.formas
 import br.com.portsadapters.fastfoodapp.application.core.domain.pagamento.formas.CartaoDebito;
 import br.com.portsadapters.fastfoodapp.application.core.domain.pagamento.formas.Dinheiro;
 import br.com.portsadapters.fastfoodapp.application.core.domain.Endereco;
-/*import br.com.portsadapters.fastfoodapp.application.core.domain.Cliente;
-import br.com.portsadapters.fastfoodapp.application.core.domain.Endereco;*/
 
 @Component
 public class FormaPagamentoEntityMapper {
@@ -158,21 +156,6 @@ public class FormaPagamentoEntityMapper {
 		return dinheiroEntity;
 	}
 
-	/*
-	 * private EnderecoResponse paraEnderecoResponse(EnderecoEntity enderecoEntity)
-	 * { EnderecoResponse enderecoResponse = new EnderecoResponse();
-	 * enderecoResponse.setCep(enderecoEntity.getCep());
-	 * enderecoResponse.setComplemento(enderecoEntity.getComplemento());
-	 * enderecoResponse.setNumero(enderecoEntity.getNumero());
-	 * enderecoResponse.setId(enderecoEntity.getId()); if
-	 * (enderecoEntity.getCliente() != null) {
-	 * enderecoResponse.setCliente(paraClienteResponse(enderecoEntity.getCliente()))
-	 * ; } if (enderecoEntity.getEmpresa() != null) {
-	 * enderecoResponse.setEmpresa(paraEmpresaResponse(enderecoEntity.getEmpresa()))
-	 * ; } return enderecoResponse; }
-	 */
-	
-	
 	private List<EnderecoEntity> paraEnderecoEntity(List<Endereco> enderecos) {
 		List<EnderecoEntity> enderecoResponses = new ArrayList<>();
 		for (Endereco endereco : enderecos) {
@@ -188,17 +171,8 @@ public class FormaPagamentoEntityMapper {
 		enderecoEntity.setNumero(endereco.getNumero());
 		enderecoEntity.setRua(endereco.getRua());
 		enderecoEntity.setId(endereco.getId());
-		/*
-		 * if (enderecoEntity.getCliente() != null) {
-		 * enderecoResponse.setCliente(paraClienteResponse(enderecoEntity.getCliente()))
-		 * ; } if (enderecoEntity.getEmpresa() != null) {
-		 * enderecoResponse.setEmpresa(paraEmpresaResponse(enderecoEntity.getEmpresa()))
-		 * ; }
-		 */
 		return enderecoEntity;
 	}
-	
-	
 
 	private List<EnderecoResponse> paraEnderecoResponse(List<EnderecoEntity> enderecoEntities) {
 		List<EnderecoResponse> enderecoResponses = new ArrayList<>();
@@ -214,42 +188,23 @@ public class FormaPagamentoEntityMapper {
 		enderecoResponse.setComplemento(enderecoEntity.getComplemento());
 		enderecoResponse.setNumero(enderecoEntity.getNumero());
 		enderecoResponse.setId(enderecoEntity.getId());
-		/*
-		 * if (enderecoEntity.getCliente() != null) {
-		 * enderecoResponse.setCliente(paraClienteResponse(enderecoEntity.getCliente()))
-		 * ; } if (enderecoEntity.getEmpresa() != null) {
-		 * enderecoResponse.setEmpresa(paraEmpresaResponse(enderecoEntity.getEmpresa()))
-		 * ; }
-		 */
 		return enderecoResponse;
 	}
 
 	private ClienteResponse paraClienteResponse(ClienteEntity clienteEntity) {
 		ClienteResponse clienteResponse = new ClienteResponse();
 		clienteResponse.setId(clienteEntity.getId());
-		// clienteResponse.setFormasPagamento(clienteEntity.getFormasPagamento());
 		clienteResponse.setCpfCnpj(clienteEntity.getCpfCnpj());
 		clienteResponse.setNome(clienteEntity.getNome());
-		/*
-		 * if (clienteEntity.getEmpresa() != null) {
-		 * clienteResponse.setEmpresa(paraEmpresaResponse(clienteEntity.getEmpresa()));
-		 * }
-		 */
 		clienteResponse.setEnderecos(paraEnderecoResponse(clienteEntity.getEnderecos()));
 		return clienteResponse;
 	}
-	
+
 	private ClienteEntity paraClienteEntity(Cliente cliente) {
 		ClienteEntity clienteEntity = new ClienteEntity();
 		clienteEntity.setId(cliente.getId());
-		// clienteResponse.setFormasPagamento(clienteEntity.getFormasPagamento());
 		clienteEntity.setCpfCnpj(cliente.getCpfCnpj());
 		clienteEntity.setNome(cliente.getNome());
-		/*
-		 * if (clienteEntity.getEmpresa() != null) {
-		 * clienteResponse.setEmpresa(paraEmpresaResponse(clienteEntity.getEmpresa()));
-		 * }
-		 */
 		clienteEntity.setEnderecos(paraEnderecoEntity(cliente.getEnderecos()));
 		return clienteEntity;
 	}
@@ -270,10 +225,6 @@ public class FormaPagamentoEntityMapper {
 			enderecoResponse.setNumero(enderecoEntity.getNumero());
 			enderecoResponse.setRua(enderecoEntity.getRua());
 			enderecoResponse.setNumero(enderecoEntity.getNumero());
-			/*
-			 * enderecoResponse.setCliente(enderecoEntity.getCliente());
-			 * enderecoResponse.setEmpresa(enderecoEntity.getEmpresa());
-			 */
 			enderecoResponse.setId(enderecoEntity.getId());
 			enderecos.add(enderecoResponse);
 		}

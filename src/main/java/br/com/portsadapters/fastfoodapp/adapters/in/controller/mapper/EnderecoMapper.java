@@ -46,19 +46,19 @@ public class EnderecoMapper {
 		enderecoEntity.setComplemento(enderecoRequest.getComplemento());
 		return enderecoEntity;
 	}
-	
+
 	public List<EnderecoResponse> paraEnderecoResponse(List<EnderecoEntity> enderecoEntities) {
-	    List<EnderecoResponse> enderecoResponses = new ArrayList<>();
-	    for (EnderecoEntity enderecoEntity : enderecoEntities) {
-	        EnderecoResponse enderecoResponse = new EnderecoResponse();
-	        enderecoResponse.setId(enderecoEntity.getId());
-	        enderecoResponse.setRua(enderecoEntity.getRua());
-	        enderecoResponse.setCep(enderecoEntity.getCep());
-	        enderecoResponse.setNumero(enderecoEntity.getNumero());
-	        enderecoResponse.setComplemento(enderecoEntity.getComplemento());
-	        enderecoResponses.add(enderecoResponse);
-	    }
-	    return enderecoResponses;
+		List<EnderecoResponse> enderecoResponses = new ArrayList<>();
+		for (EnderecoEntity enderecoEntity : enderecoEntities) {
+			EnderecoResponse enderecoResponse = new EnderecoResponse();
+			enderecoResponse.setId(enderecoEntity.getId());
+			enderecoResponse.setRua(enderecoEntity.getRua());
+			enderecoResponse.setCep(enderecoEntity.getCep());
+			enderecoResponse.setNumero(enderecoEntity.getNumero());
+			enderecoResponse.setComplemento(enderecoEntity.getComplemento());
+			enderecoResponses.add(enderecoResponse);
+		}
+		return enderecoResponses;
 	}
 
 	public List<EnderecoEntity> paraListaEnderecoEntity(List<EnderecoRequest> enderecosRequest) {
@@ -143,7 +143,7 @@ public class EnderecoMapper {
 
 		return listaEnderecoEntity;
 	}
-	
+
 	public List<EnderecoEntity> paraEnderecoEntity(List<Endereco> listaEndereco, EmpresaEntity empresa) {
 
 		List<EnderecoEntity> listaEnderecoEntity = new ArrayList<>();
@@ -201,30 +201,28 @@ public class EnderecoMapper {
 
 		return empresaEntity;
 	}
-	
-    public List<ClienteEntity> deClienteParaClienteEntity(List<Cliente> clientes) {
-        List<ClienteEntity> clientesEntity = new ArrayList<>();
-        for (Cliente cliente : clientes) {
-            ClienteEntity clienteEntity = new ClienteEntity();
-            
-            clienteEntity.setId(cliente.getId());
 
-            clienteEntity.setNome(cliente.getNome());
-            clienteEntity.setCpfCnpj(cliente.getCpfCnpj());
-            clienteEntity.setEnderecos(paraEnderecoEntity(cliente.getEnderecos()));
+	public List<ClienteEntity> deClienteParaClienteEntity(List<Cliente> clientes) {
+		List<ClienteEntity> clientesEntity = new ArrayList<>();
+		for (Cliente cliente : clientes) {
+			ClienteEntity clienteEntity = new ClienteEntity();
 
-            clienteEntity.setEmpresa(paraEmpresaEntiy(cliente.getEmpresa()));
+			clienteEntity.setId(cliente.getId());
 
-            clientesEntity.add(clienteEntity);
-        }
-        return clientesEntity;
-    }
+			clienteEntity.setNome(cliente.getNome());
+			clienteEntity.setCpfCnpj(cliente.getCpfCnpj());
+			clienteEntity.setEnderecos(paraEnderecoEntity(cliente.getEnderecos()));
+
+			clienteEntity.setEmpresa(paraEmpresaEntiy(cliente.getEmpresa()));
+
+			clientesEntity.add(clienteEntity);
+		}
+		return clientesEntity;
+	}
 
 	public List<EnderecoEntity> paraEnderecoEntity(List<Endereco> listaEndereco, ClienteEntity clienteEntity) {
 
 		List<EnderecoEntity> listaEnderecoEntity = new ArrayList<>();
-
-		System.out.print(listaEndereco);
 
 		if (listaEndereco != null) {
 
