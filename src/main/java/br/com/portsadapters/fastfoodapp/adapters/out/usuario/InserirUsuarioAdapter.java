@@ -1,6 +1,7 @@
 package br.com.portsadapters.fastfoodapp.adapters.out.usuario;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import br.com.portsadapters.fastfoodapp.adapters.in.controller.mapper.UsuarioMapperInterface;
@@ -21,12 +22,13 @@ public class InserirUsuarioAdapter implements InserirUsuarioOutputPort {
 	private UsuarioMapperInterface usuarioMapperInterface;
 
 	@Override
-	public UsuarioEntity inserir(Usuario usuario) {
+	public ResponseEntity<UsuarioEntity> inserir(Usuario usuario) {
 		if (this.usuarioRepository.findByLogin(usuario.getLogin()) != null)
-			return null;
+			return ResponseEntity.badRequest().build();
 		UsuarioEntity usuarioEntity = usuarioMapperInterface.paraUsuarioEntity(usuario);
 		String encryptedPassword = new BCryptPasswordEncoder().encode(usuarioEntity.getPassword());
 		UsuarioEntity newUser = new UsuarioEntity(usuarioEntity.getLogin(), encryptedPassword, usuarioEntity.getRole().toString());
-		return usuarioRepository.save(newUser);
+		UsuarioEntity usuarioSalvo = usuarioRepository.save(newUser);
+		return ResponseEntity.ok(usuarioSalvo);
 	}
 }

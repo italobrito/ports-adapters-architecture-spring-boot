@@ -1,5 +1,7 @@
 package br.com.portsadapters.fastfoodapp.application.core.usecase.usuario;
 
+import org.springframework.http.ResponseEntity;
+
 import br.com.portsadapters.fastfoodapp.adapters.out.repository.entity.usuario.UsuarioEntity;
 import br.com.portsadapters.fastfoodapp.application.core.domain.Usuario;
 
@@ -15,7 +17,7 @@ public class InserirUsuarioUseCase implements InserirUsuarioInputPort {
 	}
 
 	@Override
-	public UsuarioEntity inserir(Usuario usuario) {
+	public ResponseEntity<UsuarioEntity> inserir(Usuario usuario) {
 		return this.inserirUsuarioOutputPort.inserir(usuario);
 	}
 

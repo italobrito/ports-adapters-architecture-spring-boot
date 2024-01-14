@@ -1,8 +1,10 @@
 package br.com.portsadapters.fastfoodapp.application.ports.in.usuario;
 
+import org.springframework.http.ResponseEntity;
+
 import br.com.portsadapters.fastfoodapp.adapters.out.repository.entity.usuario.UsuarioEntity;
 import br.com.portsadapters.fastfoodapp.application.core.domain.Usuario;
 
 public interface InserirUsuarioInputPort {
-	UsuarioEntity inserir(Usuario pedido);
+	ResponseEntity<UsuarioEntity> inserir(Usuario usuario);
 }

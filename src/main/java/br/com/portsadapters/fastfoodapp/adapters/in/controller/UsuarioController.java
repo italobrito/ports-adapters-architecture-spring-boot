@@ -29,8 +29,7 @@ public class UsuarioController {
 	@PostMapping
 	public ResponseEntity<UsuarioEntity> inserir(@RequestBody @Valid UsuarioRequest usuarioRequest) {
 		Usuario usuario = usuarioMapperInterface.paraUsuario(usuarioRequest);
-		UsuarioEntity usuarioEntity = inserirUsuarioInputPort.inserir(usuario);
-		return ResponseEntity.ok(usuarioEntity);
+		return inserirUsuarioInputPort.inserir(usuario);
 	}
 
 }
