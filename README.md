@@ -41,5 +41,5 @@ DDD:
 Documentação do Postman:
 [https://documenter.getpostman.com/view/2856517/2s9YsM8qKD](https://documenter.getpostman.com/view/2856517/2s9YsM8qKD)
 
-Documentação do Swagger em anexo no formato .pdf: [https://github.com/italobrito/ports-adapters-architecture-spring-boot/blob/main/API_Documentation_swagger_atualizado.pdf](https://github.com/italobrito/ports-adapters-architecture-spring-boot/blob/main/API_Documentation_swagger_atualizado.pdf)
+Documentação do Swagger em anexo no formato .pdf: [https://github.com/italobrito/ports-adapters-architecture-spring-boot/blob/main/API_Documentation_swagger_fase1.pdf](https://github.com/italobrito/ports-adapters-architecture-spring-boot/blob/main/API_Documentation_swagger_fase1.pdf)
 

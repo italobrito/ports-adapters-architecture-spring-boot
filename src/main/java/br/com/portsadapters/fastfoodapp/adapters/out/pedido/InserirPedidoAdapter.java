@@ -30,30 +30,18 @@ public class InserirPedidoAdapter implements InserirPedidoOutputPort {
 
 	@Override
 	public PedidoEntity inserir(Pedido pedido) {
-
 		PedidoEntity pedidoEntity = pedidoEntityMapper.paraPedidoEntity(pedido);
-
 		PagamentoEntity pagamentoEntity = pagamentoEntityMapper.paraPagamentoEntity(pedido.getPagamento());
-
 		pedidoEntity.setPagamento(null);
-
 		PedidoEntity pedidoSalvo = pedidoRepository.save(pedidoEntity);
-
 		pagamentoEntity.setPedido(pedidoSalvo);
-
 		pagamentoRepository.inserir(pedido.getPagamento().getFormaPagamento().getId(), pedidoSalvo.getId(),
 				pedido.getPrecoTotalPedido());
-
 		Long ultimoPagamentoId = pagamentoRepository.buscarUltimoPagamentoId();
-
 		pedidoEntity.setPagamento(pagamentoEntity);
-
 		pedidoEntity.setId(pedidoSalvo.getId());
-
 		pedidoSalvo.getPagamento().setId(ultimoPagamentoId);
-
 		pedidoRepository.pagamentoId(ultimoPagamentoId, pedidoSalvo.getId());
-
 		return pedidoSalvo;
 	}
 
