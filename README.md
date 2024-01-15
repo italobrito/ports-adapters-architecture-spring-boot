@@ -26,9 +26,10 @@ Dentro do projeto execute:
 
 ```
 mvn install
+mvn package
 
-docker build -t tech-challenge
 
+docker-compose build
 docker-compose up
 
 ```
